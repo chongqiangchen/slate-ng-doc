@@ -5,7 +5,8 @@
     "-highlight",
     "tbfed-pagefooter",
     "accordion",
-    "theme-cqbook"
+    "theme-cqbook",
+    "pageview-count"
   ],
   "variables": {
     "themeHqbook":{
