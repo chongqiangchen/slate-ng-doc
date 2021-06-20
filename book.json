@@ -1,23 +1,44 @@
 {
-  "title": "slate-ng document",
-  "styles": {
-    "website": "styles/website.css",
-    "ebook": "styles/ebook.css",
-    "pdf": "styles/pdf.css",
-    "mobi": "styles/mobi.css",
-    "epub": "styles/epub.css"
-  },
+  "title": "Slate Ng Document",
   "plugins": [
     "emphasize",
     "-highlight",
     "tbfed-pagefooter",
-    "accordion"
+    "accordion",
+    "theme-cqbook"
   ],
+  "variables": {
+    "themeHqbook":{
+      "nav":[
+        {
+          "url": "https://chongqiangchen.github.io/slate-ng",
+          "target": "_blank",
+          "name": "Examples"
+        },
+        {
+          "url": "https://github.com/chongqiangchen/slate-ng",
+          "target": "_blank",
+          "name": "Github"
+        }
+      ]
+    }
+  },
   "pluginsConfig": {
     "tbfed-pagefooter": {
       "copyright": "Copyright",
       "modify_label": "该文件修订时间：",
       "modify_format": "YYYY-MM-DD HH:mm:ss"
+    },
+    "theme-hqbook":{
+      "favicon": "./favicon.ico",
+      "logo":"../../../logo.png",
+      "search-placeholder":"search",
+      "copyButtons": true,
+      "copyLines": true,
+      "dragSplitter": true,
+      "hide-elements": [
+        ".summary .gitbook-link"
+      ]
     }
   }
 }
