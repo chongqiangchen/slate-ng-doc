@@ -9,7 +9,8 @@
     "plugins": [
       "emphasize",
       "-highlight",
-      "tbfed-pagefooter"
+      "tbfed-pagefooter",
+      "accordion"
       ],
     "pluginsConfig": {
         "tbfed-pagefooter": {
