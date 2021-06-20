@@ -93,7 +93,7 @@
         ]
        ```
 
-       可能会觉得奇怪，那child的内容在哪，这里涉及到componentportal injector知识，前面注解也有提到，也就是说，每个ComponentPortal事实上带着一个它的childPortals，你可以将产出的protals理解为这样的结构（真实结构肯定不这样，但是你可以大致这么理解我们有这么一个大概的结构）：
+       可能会觉得奇怪，那`child`的内容在哪，这里涉及到`componentportal injector`知识，前面注解也有提到，也就是说，每个`ComponentPortal`事实上带着一个它的`childPortals`，你可以将产出的`protals`理解为这样的结构（真实结构肯定不这样，但是你可以大致这么理解我们有这么一个大概的结构）：
 
        ```
        [
