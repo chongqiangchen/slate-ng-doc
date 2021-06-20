@@ -1,14 +1,14 @@
 
 
-实现方案介绍
+实现方案介绍 (修改中)
 
-1. 介绍slate 与slate-ng 分工情况，交互逻辑
+1. 交互逻辑
 
    <img src="../images/image-20210619163348259.png" alt="image-20210619163348259" style="zoom:50%;" />
 
-2. Slate ng介绍
+2. 方案介绍
 
-   结构：
+   slate-ng大致结构：
 
    <img src="../images/image-20210619172253182.png" alt="image-20210619172253182" style="zoom:25%;" />
 
@@ -60,10 +60,11 @@
        在这里我参考了react use-children的一些处理方式，创建了children组件，该组件用于递归遍历editor的数据组装出一个完整的portals，代码如下（简化后的代码）：
 
        ```
-       resolvePortals(pNode: Ancestor): Array<ComponentPortal<any>> {
+       
+        resolvePortals(pNode: Ancestor): Array<ComponentPortal<any>> {
            const children = [];
            const editor = this.editorService.editor;
-                           // ...
+           // ...
            for (let i = 0; i < pNode.children.length; i++) {
              const cNode = pNode.children[i] as Ancestor | Descendant;
              // ...
@@ -72,7 +73,7 @@
              if ((cNode as Ancestor).children) {
                childPortals = this.resolvePortals(cNode as Ancestor); // 重点
              }
-                                   // 通过Injector存储childProtals
+             // 通过Injector存储childProtals
              const providers = [
                {provide: CHILD_PORTALS_TOKEN, useValue: childPortals } 
                // ...
@@ -84,13 +85,12 @@
            return children;
          }
          
-         
-       // portals
-       [
-               ComponentPortalA,
-               ComponentPortalB,
-               ...
-       ]
+        // portals
+        [
+                ComponentPortalA,
+                ComponentPortalB,
+                ...
+        ]
        ```
 
        可能会觉得奇怪，那child的内容在哪，这里涉及到componentportal injector知识，前面注解也有提到，也就是说，每个ComponentPortal事实上带着一个它的childPortals，你可以将产出的protals理解为这样的结构（真实结构肯定不这样，但是你可以大致这么理解我们有这么一个大概的结构）：
@@ -98,12 +98,12 @@
        ```
        [
             ComponentPortalA: {
-                       injector: {
-                               child_token: 	[
-                                       ComponentPortalA0,
-                                       ComponentPortalA1
-                               ]
-                       }
+                 injector: {
+                    child_token: [
+                       ComponentPortalA0,
+                       ComponentPortalA1
+                    ]            
+                 }
             },
             ComponentPortalB // 同样
        ]
@@ -127,13 +127,13 @@
 
        ```
        {
-               type: 'list',
-               children: [
-                       {
-                               type: 'li',
-                               ...
-                       }
-               ]
+            type: 'list',
+            children: [
+              {
+                 type: 'li',
+                 ...
+              }
+            ]
        }
        ```
 
