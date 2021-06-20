@@ -1,22 +1,23 @@
 {
-    "styles": {
-        "website": "styles/website.css",
-        "ebook": "styles/ebook.css",
-        "pdf": "styles/pdf.css",
-        "mobi": "styles/mobi.css",
-        "epub": "styles/epub.css"
-     },
-    "plugins": [
-      "emphasize",
-      "-highlight",
-      "tbfed-pagefooter",
-      "accordion"
-      ],
-    "pluginsConfig": {
-        "tbfed-pagefooter": {
-        "copyright":"Copyright",
-        "modify_label": "该文件修订时间：",
-        "modify_format": "YYYY-MM-DD HH:mm:ss"
-       }
-     }
+  "title": "slate-ng document",
+  "styles": {
+    "website": "styles/website.css",
+    "ebook": "styles/ebook.css",
+    "pdf": "styles/pdf.css",
+    "mobi": "styles/mobi.css",
+    "epub": "styles/epub.css"
+  },
+  "plugins": [
+    "emphasize",
+    "-highlight",
+    "tbfed-pagefooter",
+    "accordion"
+  ],
+  "pluginsConfig": {
+    "tbfed-pagefooter": {
+      "copyright": "Copyright",
+      "modify_label": "该文件修订时间：",
+      "modify_format": "YYYY-MM-DD HH:mm:ss"
+    }
+  }
 }
