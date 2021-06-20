@@ -1,10 +1,10 @@
 
 <!DOCTYPE HTML>
-<html lang="zh" >
+<html lang="en" >
     <head>
         <meta charset="UTF-8">
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-        <title>实现方案 · slate-ng document</title>
+        <title>Implementation Plan · slate-ng document</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
         <meta name="generator" content="GitBook 3.2.3">
@@ -64,7 +64,7 @@
 
     
     
-    <link rel="prev" href="question.html" />
+    <link rel="prev" href="api/placeholder-attrs-directive.html" />
     
 
     </head>
@@ -75,7 +75,7 @@
         
             
 <div id="book-search-input" role="search">
-    <input type="text" placeholder="輸入並搜尋" />
+    <input type="text" placeholder="Type to search" />
 </div>
 
             
@@ -98,7 +98,7 @@
                 <a href="../">
             
                     
-                    介绍
+                    Introduction
             
                 </a>
             
@@ -111,7 +111,7 @@
                 <span>
             
                     
-                    实战
+                    Walkthroughs
             
                 </span>
             
@@ -125,7 +125,7 @@
                 <a href="walkthroughs/install.html">
             
                     
-                    安装
+                    Install
             
                 </a>
             
@@ -138,7 +138,7 @@
                 <a href="walkthroughs/adding-event-handlers.html">
             
                     
-                    添加事件处理器
+                    Adding Event Handlers
             
                 </a>
             
@@ -151,7 +151,7 @@
                 <a href="walkthroughs/defining-custom-elements.html">
             
                     
-                    自定义节点
+                    Defining Custom Elements
             
                 </a>
             
@@ -164,7 +164,7 @@
                 <a href="walkthroughs/applying-custom-formatting.html">
             
                     
-                    自定义样式
+                    Applying Custom Formatting
             
                 </a>
             
@@ -177,7 +177,7 @@
                 <a href="walkthroughs/defining-custom-placeholder.html">
             
                     
-                    自定义Placeholder
+                    Defining Custom Placeholder
             
                 </a>
             
@@ -190,7 +190,7 @@
                 <a href="walkthroughs/bind-attr.html">
             
                     
-                    绑定相关attr至指定元素
+                    Bind Attr
             
                 </a>
             
@@ -313,25 +313,19 @@
             
         </li>
     
-        <li class="chapter " data-level="1.4" data-path="question.html">
-            
-                <a href="question.html">
-            
-                    
-                    问题
-            
-                </a>
-            
 
-            
-        </li>
     
-        <li class="chapter active" data-level="1.5" data-path="principle.html">
+        
+        <li class="divider"></li>
+        
+        
+    
+        <li class="chapter active" data-level="2.1" data-path="principle.html">
             
                 <a href="principle.html">
             
                     
-                    实现方案
+                    Implementation Plan
             
                 </a>
             
@@ -346,7 +340,7 @@
 
     <li>
         <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
-            本書使用 GitBook 釋出
+            Published with GitBook
         </a>
     </li>
 </ul>
@@ -369,7 +363,7 @@
     <!-- Title -->
     <h1>
         <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href=".." >实现方案</a>
+        <a href=".." >Implementation Plan</a>
     </h1>
 </div>
 
@@ -384,30 +378,33 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <p>&#x5B9E;&#x73B0;&#x65B9;&#x6848;&#x4ECB;&#x7ECD; (&#x4FEE;&#x6539;&#x4E2D;)</p>
+                                <h1 id="implementation-plan-under-revision">Implementation plan (under revision)</h1>
 <ol>
-<li><p>&#x4EA4;&#x4E92;&#x903B;&#x8F91;</p>
+<li><p>Interactive process</p>
 <p><img src="../images/image-20210619163348259.png" alt="image-20210619163348259" style="zoom:50%;"></p>
 </li>
-<li><p>&#x65B9;&#x6848;&#x4ECB;&#x7ECD;</p>
-<p>slate-ng&#x5927;&#x81F4;&#x7ED3;&#x6784;&#xFF1A;</p>
+<li><p>Analysis</p>
+<p>The general structure of slate-ng:</p>
 <p><img src="../images/image-20210619172253182.png" alt="image-20210619172253182" style="zoom:25%;"></p>
-<p>&#x4ECE;&#x56FE;&#x4E2D;&#xFF0C;&#x6211;&#x4EEC;&#x53EF;&#x4EE5;&#x770B;&#x5230;slate-ng&#x5927;&#x6982;&#x7684;&#x7ED3;&#x6784;&#xFF0C;&#x5728;slate-ng&#x4E2D;&#x5C06;&#x6BCF;&#x4E2A;Slate Node&#x5F53;&#x505A;&#x4E00;&#x4E2A;&#x7EC4;&#x4EF6;, &#x6839;&#x636E;&#x4E00;&#x5B9A;&#x7684;&#x8981;&#x6C42;&#x8FDB;&#x884C;&#x7EC4;&#x88C5;&#x6210; Component Portal&#xFF0C; &#x5E76;&#x6302;&#x8F7D;&#x5230;&#x5BF9;&#x5E94;&#x4F4D;&#x7F6E;&#x8FDB;&#x884C;&#x6E32;&#x67D3;&#x663E;&#x793A;&#xFF0C;&#x800C;&#x5728;&#x8FD9;&#x91CC;&#x9762;&#x6838;&#x5FC3;&#x70B9;&#x5C31;&#x5728;children&#x4E0B;&#x7684;&#x903B;&#x8F91;&#xFF0C;&#x8FD9;&#x91CC;&#x6D89;&#x53CA;&#x51E0;&#x4E2A;&#x70B9;&#xFF1A;</p>
+<p>From the figure, we can see the general structure of slate-ng. In slate-ng, each Slate Node is regarded as a Component, assembled into <code>Component Portal</code> according to certain requirements, and mounted to the corresponding position for rendering and display. 
+The core point here lies in the logic under <code>Children</code>. Here are a few points involved:</p>
 <ul>
-<li><p>&#x5982;&#x4F55;&#x83B7;&#x53D6;&#x6BCF;&#x4E2A;node&#x5BF9;&#x5E94;&#x7684;&#x7EC4;&#x4EF6;&#xFF1F;</p>
+<li><p>How to get the components corresponding to each node?</p>
 </li>
-<li><p>&#x5982;&#x4F55;&#x5904;&#x7406;&#x6BCF;&#x4E2A;node&#x5BF9;&#x5E94;&#x7684;&#x7EC4;&#x4EF6;&#x548C;&#x5176;&#x5B50;&#x9879; &#xFF1F;</p>
+<li><p>How to deal with the component and its children corresponding to each node?</p>
 </li>
-<li><p>&#x5982;&#x4F55;&#x4F20;&#x9012;&#x4E0A;&#x4E0B;&#x6587;&#x5230;&#x6BCF;&#x4E2A;&#x52A8;&#x6001;&#x7EC4;&#x4EF6;&#x4E2D; &#xFF1F;</p>
+<li><p>How to pass the context to each dynamic component?</p>
 </li>
-<li><p>&#x5982;&#x4F55;&#x4F18;&#x5316;&#x5904;&#x7406;&#x65B9;&#x6848; &#xFF1F;</p>
+<li><p>How to optimize the treatment plan?</p>
 </li>
 </ul>
-<p>&#x90A3;&#x4E48;&#x6211;&#x4EEC;&#x4E00;&#x70B9;&#x4E00;&#x70B9;&#x8FC7;&#x4E00;&#x4E0B;&#xFF1A;</p>
+<p>Then let&apos;s go over it bit by bit&#xFF1A;</p>
 <ol>
-<li><p>&#x5982;&#x4F55;&#x83B7;&#x53D6;&#x6BCF;&#x4E2A;node&#x5BF9;&#x5E94;&#x7684;&#x7EC4;&#x4EF6; &#xFF1F;</p>
-<p>&#x8FD9;&#x91CC;&#x5C06;&#x533A;&#x522B;&#x4E8E;react&#x5904;&#x7406;&#x65B9;&#x5F0F;&#xFF0C;&#x5728;react&#x4E2D;&#x901A;&#x8FC7;renderElement&#xFF0C;renderLeaf&#xFF0C;renderPlaceholder&#x5206;&#x522B;&#x4F20;&#x9012;&#x5230;&#x7EC4;&#x4EF6;&#x5185;&#x8FDB;&#x884C;&#x5904;&#x7406;&#xFF0C;&#x4F46;&#x662F;&#x5728;slate-ng&#x4E2D;&#x6211;&#x4EEC;&#x65E0;&#x6CD5;&#x8F83;&#x597D;&#x7684;&#x4EAB;&#x6709;&#x8FD9;&#x79CD;&#x65B9;&#x5F0F;&#x5E26;&#x6765;&#x7684;&#x597D;&#x5904;&#xFF0C;&#x6545;&#x6211;&#x7B80;&#x5316;&#x4E3A;&#x5982;&#x4E0B;&#x4F20;&#x9012;&#x548C;&#x5B58;&#x50A8;&#xFF08;&#x5728;slate-ng&#x5B9E;&#x73B0;&#x4E0A;&#x4F1A;&#x6709;&#x4E00;&#x4E9B;&#x533A;&#x522B;&#x5982;&#x4E0B;&#xFF0C;&#x53EF;&#x67E5;&#x770B;<a href="https://github.com/chongqiangchen/slate-ng/blob/master/projects/slate-ng-view/src/services/registry-ns-element.service.ts" target="_blank">registry-ns-element</a>&#xFF09;:</p>
-<pre><code>// &#x521D;&#x59CB;&#x5B58;&#x50A8;&#x7684;&#x5185;&#x5BB9;
+<li><p>How to get the components corresponding to each node &#xFF1F;</p>
+<p>The approach here is different from react, react in by <code>renderElement</code>,<code>renderLeaf</code>, <code>renderPlaceholder</code> are transmitted to the inner components for processing, 
+but we cannot enjoy the benefits of this approach in <code>slate-ng</code>. So I simplified it to the following transmission and storage (there will be some differences 
+in the implementation of slate-ng as follows, see <a href="https://github.com/chongqiangchen/slate-ng/blob/master/projects/slate-ng-view/src/services/registry-ns-element.service.ts" target="_blank">registry-ns-element</a>:</p>
+<pre><code>// default store value
 const defaultStore = {
         default: DefalutElementComponent,
         text: TextComponent,
@@ -415,25 +412,26 @@ const defaultStore = {
         placeholder: PlaceholderComponent
 }
 
-// &#x65B0;&#x5EFA;&#x4E00;&#x4E2A;Node&#x5BF9;&#x5E94;&#x7684;Component
+// create a new Component corresponding to Node
 @Component({...})
 export class ComponentA {
-        static type = &apos;A&apos; // &#x7EC4;&#x4EF6;&#x7684;&#x6807;&#x8BC6;
+        static type = &apos;A&apos; // node component flag
 }
 
-// &#x4F7F;&#x7528;service&#x8FDB;&#x884C;&#x6CE8;&#x518C;
+// use service to register
 this.registryService.add([ComponentA, ComponentB])
 
-// &#x6700;&#x7EC8;&#x5F97;&#x5230;&#x7684;store
+// the final store
 const store = {
         ...defaultStore,
         A: ComponentA
 }
 
-// &#x83B7;&#x53D6;&#x65F6;&#x76F4;&#x63A5;&#x4ECE;&#x5BF9;&#x8C61;&#x6839;&#x636E;type&#x83B7;&#x53D6;
+// Obtain directly from the object according to the type
 </code></pre></li>
-<li><p>&#x5982;&#x4F55;&#x5904;&#x7406;&#x6BCF;&#x4E2A;node&#x5BF9;&#x5E94;&#x7684;&#x7EC4;&#x4EF6;&#x548C;&#x5176;&#x5B50;&#x9879; &#xFF1F;</p>
-<p>&#x5728;&#x8FD9;&#x91CC;&#x6211;&#x53C2;&#x8003;&#x4E86;react use-children&#x7684;&#x4E00;&#x4E9B;&#x5904;&#x7406;&#x65B9;&#x5F0F;&#xFF0C;&#x521B;&#x5EFA;&#x4E86;children&#x7EC4;&#x4EF6;&#xFF0C;&#x8BE5;&#x7EC4;&#x4EF6;&#x7528;&#x4E8E;&#x9012;&#x5F52;&#x904D;&#x5386;editor&#x7684;&#x6570;&#x636E;&#x7EC4;&#x88C5;&#x51FA;&#x4E00;&#x4E2A;&#x5B8C;&#x6574;&#x7684;portals&#xFF0C;&#x4EE3;&#x7801;&#x5982;&#x4E0B;&#xFF08;&#x7B80;&#x5316;&#x540E;&#x7684;&#x4EE3;&#x7801;&#xFF09;&#xFF1A;</p>
+<li><p>How to deal with the component and its children corresponding to each node?</p>
+<p>Here I refer to some processing methods of <code>react</code> <code>use-children</code> and create a children component used to recursively traverse the editor data to assemble a complete portal. 
+The code is as follows (simplified code)&#xFF1A;</p>
 <pre><code>
  resolvePortals(pNode: Ancestor): Array&lt;ComponentPortal&lt;any&gt;&gt; {
     const children = [];
@@ -445,9 +443,9 @@ const store = {
       let childPortals = [];
       let portal = null;
       if ((cNode as Ancestor).children) {
-        childPortals = this.resolvePortals(cNode as Ancestor); // &#x91CD;&#x70B9;
+        childPortals = this.resolvePortals(cNode as Ancestor); // Important!
       }
-      // &#x901A;&#x8FC7;Injector&#x5B58;&#x50A8;childProtals
+      // Store childProtals through Injector
       const providers = [
         {provide: CHILD_PORTALS_TOKEN, useValue: childPortals } 
         // ...
@@ -461,11 +459,12 @@ const store = {
 
  // portals
  [
-         ComponentPortalA,
-         ComponentPortalB,
-         ...
+    ComponentPortalA,
+    ComponentPortalB,
+    ...
  ]
-</code></pre><p>&#x53EF;&#x80FD;&#x4F1A;&#x89C9;&#x5F97;&#x5947;&#x602A;&#xFF0C;&#x90A3;<code>child</code>&#x7684;&#x5185;&#x5BB9;&#x5728;&#x54EA;&#xFF0C;&#x8FD9;&#x91CC;&#x6D89;&#x53CA;&#x5230;<code>componentportal injector</code>&#x77E5;&#x8BC6;&#xFF0C;&#x524D;&#x9762;&#x6CE8;&#x89E3;&#x4E5F;&#x6709;&#x63D0;&#x5230;&#xFF0C;&#x4E5F;&#x5C31;&#x662F;&#x8BF4;&#xFF0C;&#x6BCF;&#x4E2A;<code>ComponentPortal</code>&#x4E8B;&#x5B9E;&#x4E0A;&#x5E26;&#x7740;&#x4E00;&#x4E2A;&#x5B83;&#x7684;<code>childPortals</code>&#xFF0C;&#x4F60;&#x53EF;&#x4EE5;&#x5C06;&#x4EA7;&#x51FA;&#x7684;<code>protals</code>&#x7406;&#x89E3;&#x4E3A;&#x8FD9;&#x6837;&#x7684;&#x7ED3;&#x6784;&#xFF08;&#x771F;&#x5B9E;&#x7ED3;&#x6784;&#x80AF;&#x5B9A;&#x4E0D;&#x8FD9;&#x6837;&#xFF0C;&#x4F46;&#x662F;&#x4F60;&#x53EF;&#x4EE5;&#x5927;&#x81F4;&#x8FD9;&#x4E48;&#x7406;&#x89E3;&#x6211;&#x4EEC;&#x6709;&#x8FD9;&#x4E48;&#x4E00;&#x4E2A;&#x5927;&#x6982;&#x7684;&#x7ED3;&#x6784;&#xFF09;&#xFF1A;</p>
+</code></pre><p>You may find it strange, where is the content of <code>child</code>? This involves the knowledge of <code>ComponentPortal Injector</code>, which is also mentioned in the previous annotations. 
+That is to say, each <code>ComponentPortal</code> actually carries its <code>childPortals</code>, you The output of <code>protals</code> can be understood as such a structure (the real structure is definitely not the case, but you can roughly understand that we have such a general structure):</p>
 <pre><code>[
      ComponentPortalA: {
           injector: {
@@ -475,18 +474,18 @@ const store = {
              ]            
           }
      },
-     ComponentPortalB // &#x540C;&#x6837;
+     ComponentPortalB
 ]
-</code></pre><p>&#x6700;&#x7EC8;&#x6211;&#x4EEC;&#x4E22;&#x5230;html&#x4E2D;&#x8FDB;&#x884C;&#x5904;&#x7406;&#x6E32;&#x67D3;&#xFF1A;</p>
+</code></pre><p>Finally, we put it in html for processing and rendering:</p>
 <pre><code>&lt;ng-container *ngFor=&quot;let portal of showPortals;&quot;&gt;
   &lt;ng-template [cdkPortalOutlet]=&quot;portal&quot;&gt;&lt;/ng-template&gt;
 &lt;/ng-container&gt;
 </code></pre></li>
-<li><p>&#x5982;&#x4F55;&#x4F20;&#x9012;&#x4E0A;&#x4E0B;&#x6587;&#x5230;&#x6BCF;&#x4E2A;&#x52A8;&#x6001;&#x7EC4;&#x4EF6;&#x4E2D; &#xFF1F;</p>
-<p>&#x4E8B;&#x5B9E;&#x4E0A;&#x6211;&#x4EEC;&#x5728;&#x7B2C;&#x4E8C;&#x70B9;&#x4E2D;&#x4E5F;&#x6709;&#x6D89;&#x53CA;&#xFF0C;&#x90A3;&#x5C31;&#x662F;Component&#x5141;&#x8BB8;&#x4F20;&#x9012;injector&#xFF0C;&#x6211;&#x4EEC;&#x5C06;&#x6240;&#x9700;&#x8981;&#x7684;&#x5185;&#x5BB9;&#x901A;&#x8FC7;<code>Injector.create(providers, this.parentInjector)</code>&#x4F20;&#x9012;</p>
+<li><p>How to pass the context to each dynamic component &#xFF1F;</p>
+<p>In fact, we also involved in the second point, that is, <code>Component</code> allows passing <code>injector</code>, we pass the required content through <code>Injector.create(providers, this.parentInjector)</code></p>
 </li>
-<li><p>&#x5982;&#x4F55;&#x4F18;&#x5316;&#x5904;&#x7406;&#x65B9;&#x6848; &#xFF1F;</p>
-<p>&#x5728;&#x8FD9;&#x91CC;&#x6709;&#x4E2A;&#x95EE;&#x9898;&#xFF0C;&#x56E0;&#x4E3A;&#x6211;&#x4EEC;&#x6BCF;&#x6B21;&#x90FD;&#x4F1A;&#x521B;&#x5EFA;&#x4E00;&#x4E2A;&#x65B0;&#x7684;ComponentPortal&#xFF0C;&#x4F46;&#x662F;&#x5F97;&#x6CE8;&#x610F;&#xFF0C;&#x5047;&#x8BBE;&#x6211;&#x4EEC;&#x6709;&#x4E00;&#x4E2A;&#x5E8F;&#x5217;&#xFF0C;&#x7ED3;&#x6784;&#x5982;&#x4E0B;&#xFF1A;</p>
+<li><p>How to optimize the treatment plan &#xFF1F;</p>
+<p>There is a problem here, because we will create a new ComponentPortal every time, but be careful, suppose we have a sequence, the structure is as follows:</p>
 <pre><code>{
      type: &apos;list&apos;,
      children: [
@@ -496,7 +495,8 @@ const store = {
        }
      ]
 }
-</code></pre><p>&#x5982;&#x679C;&#x8FDB;&#x884C;&#x4E00;&#x6B21;&#x5E8F;&#x5217;&#x589E;&#x52A0;&#x64CD;&#x4F5C;&#xFF0C;&#x5B83;&#x5C06;&#x4F1A;&#x5728;children&#x4E2D;&#x589E;&#x52A0;&#x4E00;&#x4E2A;li&#xFF0C;&#x800C;&#x5728;&#x524D;&#x9762;&#x7684;&#x5904;&#x7406;&#x4E2D;&#x6BCF;&#x6B21;&#x90FD;&#x4F1A;&#x91CD;&#x65B0;&#x521B;&#x5EFA;&#x4E00;&#x4E2A;&#x65B0;&#x7684;ComponentPortal&#xFF0C;&#x8FD9;&#x610F;&#x5473;&#x7740;&#x4E00;&#x4E2A;&#x5C0F;&#x53D8;&#x66F4;&#x6211;&#x4EEC;&#x90FD;&#x9700;&#x8981;&#x5B8C;&#x5168;&#x7684;&#x91CD;&#x65B0;&#x6E32;&#x67D3;&#xFF0C;&#x8FD9;&#x662F;&#x4E00;&#x4E2A;&#x6027;&#x80FD;&#x6D88;&#x8017;&#x975E;&#x5E38;&#x5927;&#x7684;&#x95EE;&#x9898;&#xFF0C;&#x6545;&#x6211;&#x4EEC;&#x9700;&#x8981;&#x505A;&#x7F13;&#x5B58;&#xFF0C;&#x6211;&#x4EEC;&#x53EA;&#x9700;&#x8981;&#x8BA9;&#x53D8;&#x66F4;&#x7684;node&#x91CD;&#x65B0;&#x521B;&#x5EFA;&#x65B0;&#x7684;portal&#xFF0C;&#x5176;&#x4ED6;&#x7EE7;&#x7EED;&#x4F7F;&#x7528;&#x4E4B;&#x524D;&#x7684;&#xFF0C;<a href="https://github.com/chongqiangchen/slate-ng/blob/015c77ca710ff52dbabcb71374be87c2e394cc13/projects/slate-ng-view/src/components/children/children.component.ts#L175" target="_blank">&#x4EE3;&#x7801;&#x5730;&#x5740;</a></p>
+</code></pre><p>If you perform a sequence addition operation, it will add a <code>li</code> to <code>children</code>, and a new <code>ComponentPortal</code> will be recreated every time in the previous processing, which means that we need to complete a small change Re-rendering, this is a very high performance problem, 
+so we need to do caching, we only need to make the changed <code>node</code> recreate a new <code>portal</code>, and the others continue to use the previous ones, <a href="https://github.com/chongqiangchen/slate-ng/blob/015c77ca710ff52dbabcb71374be87c2e394cc13/projects/slate-ng-view/src/components/children/children.component.ts#L175" target="_blank">code address</a></p>
 </li>
 </ol>
 </li>
@@ -530,7 +530,7 @@ const store = {
 
             
                 
-                <a href="question.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page: 问题">
+                <a href="api/placeholder-attrs-directive.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page: PlaceholderAttrsDirective">
                     <i class="fa fa-angle-left"></i>
                 </a>
                 
@@ -542,7 +542,7 @@ const store = {
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"实现方案","level":"1.5","depth":1,"previous":{"title":"问题","level":"1.4","depth":1,"path":"docs/question.md","ref":"docs/question.md","articles":[]},"dir":"ltr"},"config":{"plugins":["emphasize","-highlight","tbfed-pagefooter","accordion"],"styles":{"website":"styles/website.css","ebook":"styles/ebook.css","pdf":"styles/pdf.css","mobi":"styles/mobi.css","epub":"styles/epub.css"},"pluginsConfig":{"tbfed-pagefooter":{"copyright":"Copyright","modify_label":"该文件修订时间：","modify_format":"YYYY-MM-DD HH:mm:ss"},"emphasize":{},"accordion":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"slate-ng document","language":"zh","gitbook":"*"},"file":{"path":"docs/principle.md","mtime":"2021-06-20T11:00:36.734Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-06-20T11:01:04.480Z"},"basePath":"..","book":{"language":"zh"}});
+            gitbook.page.hasChanged({"page":{"title":"Implementation Plan","level":"2.1","depth":1,"previous":{"title":"PlaceholderAttrsDirective","level":"1.3.7","depth":2,"path":"docs/api/placeholder-attrs-directive.md","ref":"docs/api/placeholder-attrs-directive.md","articles":[]},"dir":"ltr"},"config":{"plugins":["emphasize","-highlight","tbfed-pagefooter","accordion"],"styles":{"website":"styles/website.css","ebook":"styles/ebook.css","pdf":"styles/pdf.css","mobi":"styles/mobi.css","epub":"styles/epub.css"},"pluginsConfig":{"tbfed-pagefooter":{"copyright":"Copyright","modify_label":"该文件修订时间：","modify_format":"YYYY-MM-DD HH:mm:ss"},"emphasize":{},"accordion":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"slate-ng document","language":"en","gitbook":"*"},"file":{"path":"docs/principle.md","mtime":"2021-06-20T11:00:36.734Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-06-20T11:01:04.480Z"},"basePath":"..","book":{"language":"en"}});
         });
     </script>
 </div>

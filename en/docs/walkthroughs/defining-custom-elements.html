@@ -1,10 +1,10 @@
 
 <!DOCTYPE HTML>
-<html lang="zh" >
+<html lang="en" >
     <head>
         <meta charset="UTF-8">
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-        <title>自定义节点 · slate-ng document</title>
+        <title>Defining Custom Elements · slate-ng document</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
         <meta name="generator" content="GitBook 3.2.3">
@@ -77,7 +77,7 @@
         
             
 <div id="book-search-input" role="search">
-    <input type="text" placeholder="輸入並搜尋" />
+    <input type="text" placeholder="Type to search" />
 </div>
 
             
@@ -100,7 +100,7 @@
                 <a href="../../">
             
                     
-                    介绍
+                    Introduction
             
                 </a>
             
@@ -113,7 +113,7 @@
                 <span>
             
                     
-                    实战
+                    Walkthroughs
             
                 </span>
             
@@ -127,7 +127,7 @@
                 <a href="install.html">
             
                     
-                    安装
+                    Install
             
                 </a>
             
@@ -140,7 +140,7 @@
                 <a href="adding-event-handlers.html">
             
                     
-                    添加事件处理器
+                    Adding Event Handlers
             
                 </a>
             
@@ -153,7 +153,7 @@
                 <a href="defining-custom-elements.html">
             
                     
-                    自定义节点
+                    Defining Custom Elements
             
                 </a>
             
@@ -166,7 +166,7 @@
                 <a href="applying-custom-formatting.html">
             
                     
-                    自定义样式
+                    Applying Custom Formatting
             
                 </a>
             
@@ -179,7 +179,7 @@
                 <a href="defining-custom-placeholder.html">
             
                     
-                    自定义Placeholder
+                    Defining Custom Placeholder
             
                 </a>
             
@@ -192,7 +192,7 @@
                 <a href="bind-attr.html">
             
                     
-                    绑定相关attr至指定元素
+                    Bind Attr
             
                 </a>
             
@@ -315,25 +315,19 @@
             
         </li>
     
-        <li class="chapter " data-level="1.4" data-path="../question.html">
-            
-                <a href="../question.html">
-            
-                    
-                    问题
-            
-                </a>
-            
 
-            
-        </li>
     
-        <li class="chapter " data-level="1.5" data-path="../principle.html">
+        
+        <li class="divider"></li>
+        
+        
+    
+        <li class="chapter " data-level="2.1" data-path="../principle.html">
             
                 <a href="../principle.html">
             
                     
-                    实现方案
+                    Implementation Plan
             
                 </a>
             
@@ -348,7 +342,7 @@
 
     <li>
         <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
-            本書使用 GitBook 釋出
+            Published with GitBook
         </a>
     </li>
 </ul>
@@ -371,7 +365,7 @@
     <!-- Title -->
     <h1>
         <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href="../.." >自定义节点</a>
+        <a href="../.." >Defining Custom Elements</a>
     </h1>
 </div>
 
@@ -386,12 +380,12 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h1 id="&#x81EA;&#x5B9A;&#x4E49;&#x8282;&#x70B9;">&#x81EA;&#x5B9A;&#x4E49;&#x8282;&#x70B9;</h1>
-<p>&#x5728;&#x4E4B;&#x524D;&#x7684;&#x4F8B;&#x5B50;&#x4E2D;&#xFF0C;&#x6211;&#x4EEC;&#x90FD;&#x662F;&#x4F7F;&#x7528;&#x9ED8;&#x8BA4;&#x5185;&#x7F6E;&#x7684;block&#x8282;&#x70B9;&#x5143;&#x7D20;&#xFF0C;&#x5982;<code>paragraph</code>&#x4F7F;&#x7528;<code>&lt;div&gt;</code>&#xFF0C;&#x4E8B;&#x5B9E;&#x4E0A;&#x6211;&#x4EEC;&#x662F;&#x53EF;&#x4EE5;&#x5B9A;&#x4E49;&#x4EFB;&#x4F55;&#x7C7B;&#x578B;&#x7684;&#x81EA;&#x5B9A;&#x4E49; block &#x8282;&#x70B9;&#xFF0C;
-&#x6BD4;&#x5982;&#x5757;&#x5F15;&#x7528;&#xFF0C;&#x4EE3;&#x7801;&#x5757;&#xFF0C;&#x5217;&#x8868;&#x9879;&#x7B49;&#x3002;</p>
-<p>&#x63A5;&#x4E0B;&#x6765;&#x6211;&#x4EEC;&#x5C55;&#x793A;slate-ng&#x4E2D;&#x662F;&#x5982;&#x4F55;&#x8FDB;&#x884C;&#x81EA;&#x5B9A;&#x4E49;&#x4EE3;&#x7801;&#x5757;&#x8282;&#x70B9;&#x7684;</p>
+                                <h1 id="defining-custom-elements">Defining Custom Elements</h1>
+<p>In the previous example, we all use the default built-in <code>block</code> node element, such as <code>paragraph</code> using <code>&lt;div&gt;</code>, in fact, we can define any type of custom <code>block</code> node,
+Such as block references, code blocks, list items, etc.</p>
+<p>Next we show how to customize code block nodes in <code>slate-ng</code>:</p>
 <ol>
-<li><p>&#x9996;&#x5148;&#x521B;&#x5EFA;&#x4EE3;&#x7801;&#x5757;Component</p>
+<li><p>First Create Code Component</p>
 <pre><code> import {Component, ElementRef, Inject} from &apos;@angular/core&apos;;
  import {BaseElementComponent, Key, KEY_TOKEN, NsDepsService, NsEditorService} from &apos;slate-ng&apos;;
 
@@ -417,52 +411,52 @@
          super(key, deps, editorService, elementRef);
      }
  }
-</code></pre><div class="accordion accordionClose"><div class="accordionButton"><div class="accordionTitle"><strong>&#x89E3;&#x6790;</strong>&#xFF1A;&#x5728;&#x8FD9;&#x91CC;&#x5BF9;&#x4E0A;&#x9762;&#x7684;&#x4EE3;&#x7801;&#x505A;&#x4E00;&#x5B9A;&#x89E3;&#x91CA;&#xFF1A;</div><div class="accordionSpinnerBox"><div class="accordionSpinner"></div></div></div><div class="accordionContent">
+</code></pre><div class="accordion accordionClose"><div class="accordionButton"><div class="accordionTitle"><strong>Analyze:</strong>&#xFF1A;Here is an explanation of the above code&#xFF1A;</div><div class="accordionSpinnerBox"><div class="accordionSpinner"></div></div></div><div class="accordionContent">
 <ul>
-<li><strong>&#x4EE3;&#x7801;&#x5757;1</strong>&#xFF1A;<pre><code>   &lt;ng-container *ngFor=&quot;let portal of portals; trackBy: trackBy&quot;&gt;
+<li><strong>Code Block 1</strong>&#xFF1A;<pre><code>   &lt;ng-container *ngFor=&quot;let portal of portals; trackBy: trackBy&quot;&gt;
       &lt;ng-template [cdkPortalOutlet]=&quot;portal&quot;&gt;&lt;/ng-template&gt;
    &lt;/ng-container&gt;
-</code></pre>&#x8FD9;&#x662F;&#x662F;&#x5C06;childPortals&#xFF0C;&#x4E5F;&#x5C31;&#x662F;&#x5B50;&#x5143;&#x7D20;&#x8FDB;&#x884C;&#x6E32;&#x67D3;&#xFF0C;&#x5F53;&#x7136;&#x4F60;&#x53EF;&#x4EE5;&#x76F4;&#x63A5;&#x4F7F;&#x7528;slate-ng&#x4E2D;&#x63D0;&#x4F9B;&#x7684;ns-portal-child&#x7EC4;&#x4EF6;&#x8FDB;&#x884C;&#x66FF;&#x4EE3;&#xFF1A;<pre><code>   &lt;code&gt;
+</code></pre>   This is to render <code>childPortals</code>, that is, child elements. Of course, you can directly use the <code>ns-portal-child</code> component provided in <code>slate-ng</code> instead:<pre><code>   &lt;code&gt;
      &lt;ns-portal-entry [portals]=&quot;portals&quot;&gt;&lt;/ns-portal-entry&gt;
    &lt;/code&gt;
-</code></pre>&#x81F3;&#x4E8E;&#x4E3A;&#x4EC0;&#x4E48;&#x4F8B;&#x5B50;&#x4E2D;&#x6CA1;&#x7528;&#x4F7F;&#x7528;ns-portal-entry&#xFF0C;&#x4E3B;&#x8981;&#x539F;&#x56E0;&#x662F;&#x82E5;&#x662F;&#x4F7F;&#x7528;&#x8BE5;&#x7EC4;&#x4EF6;&#x8FDB;&#x884C;&#x6E32;&#x67D3;&#x5B50;&#x5143;&#x7D20;&#xFF0C;&#x4F1A;&#x7ED9;&#x5185;&#x90E8;&#x591A;&#x589E;&#x52A0;&#x4E00;&#x5C42;dom&#x5143;&#x7D20;&#x5305;&#x88F9;&#xFF0C;
-&#x8FD9;&#x867D;&#x7136;&#x4E0D;&#x5F71;&#x54CD;&#x7F16;&#x8F91;&#x5668;&#x8FD0;&#x884C;&#xFF0C;&#x4F46;&#x662F;&#x4F1A;&#x52A0;&#x6DF1;&#x4E00;&#x5C42;&#x5185;&#x90E8;&#x7684;&#x5143;&#x7D20;&#x8282;&#x70B9;&#xFF0C;<strong>&#x6545;&#x4E0D;&#x63A8;&#x8350;&#x5728;&#x590D;&#x6742;&#x8282;&#x70B9;&#x7EC4;&#x4EF6;&#x4E2D;&#x8FDB;&#x884C;&#x4F7F;&#x7528;</strong>&#x3002;</li>
-<li><strong>&#x4EE3;&#x7801;&#x5757;2</strong>&#xFF1A;<pre><code>export class CodeComponent extends BaseElementComponent
-</code></pre>&#x8FD9;&#x91CC;&#x7EE7;&#x627F;&#x4E86;BaseElementComponent&#xFF0C;&#x91CC;&#x9762;&#x5E2E;&#x6211;&#x4EEC;&#x505A;&#x4E86;&#x4E00;&#x5B9A;&#x7684;attr&#x589E;&#x52A0;&#x548C;&#x76F8;&#x5173;&#x5185;&#x5BB9;&#x7684;&#x521D;&#x59CB;&#x5316;&#xFF0C;&#x5982;&#x524D;&#x9762;&#x4F7F;&#x7528;&#x7684;<code>portals</code>&#xFF0C;&#x8FD9;&#x4E2A;&#x4E5F;&#x662F;BaseElement&#x5904;&#x7406;&#x597D;&#x5BFC;&#x51FA;&#x7684;,
-&#x6B63;&#x56E0;&#x5982;&#x6B64;&#xFF0C;&#x6211;&#x4EEC;&#x4E5F;&#x8981;&#x6CE8;&#x610F;&#x6211;&#x4EEC;&#x9700;&#x8981;super&#x76F8;&#x5E94;&#x4F9D;&#x8D56;&#xFF0C;&#x5177;&#x4F53;&#x53EF;&#x4EE5;&#x67E5;&#x770B;<a href="https://github.com/chongqiangchen/slate-ng/blob/015c77ca710ff52dbabcb71374be87c2e394cc13/projects/slate-ng-view/src/components/element/base-element.ts#L25" target="_blank">BaseElementComponent</a></li>
-<li><strong>&#x4EE3;&#x7801;&#x5757;3</strong>:<pre><code>constructor(
+</code></pre>However, the use of <code>ns-portal-entry</code> is not recommended. The main reason is that using this component to render sub-elements will add a layer of dom element wrapping inside.
+Although this does not affect the operation of the editor, it will deepen a layer of internal element nodes, so it is not recommended to use it in complex node components.</li>
+<li><strong>Code Block 2</strong>&#xFF1A;<pre><code>export class CodeComponent extends BaseElementComponent
+</code></pre>This inherits <code>BaseElementComponent</code>, which helps us to do a certain amount of <code>attr</code> increase and related content initialization, 
+such as the previous use of <code>portals</code>, this is also handled by <code>BaseElement</code> to export, and for this reason, we should also pay attention We need the corresponding dependencies of <code>super</code>, you can check xxx for details<a href="https://github.com/chongqiangchen/slate-ng/blob/015c77ca710ff52dbabcb71374be87c2e394cc13/projects/slate-ng-view/src/components/element/base-element.ts#L25" target="_blank">BaseElementComponent</a></li>
+<li><strong>Code Block 3</strong>:<pre><code>constructor(
    @Inject(KEY_TOKEN) readonly key: Key,
    public deps: NsDepsService,
    public editorService: NsEditorService,
    public elementRef: ElementRef,
 ){//...}
-</code></pre>&#x8FD9;&#x91CC;&#x662F;&#x6211;&#x4EEC;&#x53EF;&#x83B7;&#x77E5;&#x7684;&#x8282;&#x70B9;&#x4FE1;&#x606F;&#xFF0C;&#x9996;&#x5148;&#x6BCF;&#x4E2A;&#x8282;&#x70B9;&#x5143;&#x7D20;&#x90FD;&#x4F1A;&#x6709;&#x4E00;&#x4E2A;&#x81EA;&#x5DF1;&#x7684;key&#x4F5C;&#x4E3A;&#x6807;&#x8BC6;&#xFF0C;&#x6211;&#x4EEC;&#x901A;&#x8FC7;<code>@Inject(KEY_TOKEN)</code>&#x83B7;&#x53D6;&#x3002;
-&#x5176;&#x7ED3;&#x5408;<code>NsDepsService</code>&#x53EF;&#x4EE5;&#x83B7;&#x53D6;&#x5230;&#x5F53;&#x524D;&#x7EC4;&#x4EF6;&#x6240;&#x9700;&#x8981;&#x7684;&#x6240;&#x6709;&#x4F9D;&#x8D56;&#xFF0C;&#x5177;&#x4F53;&#x5B58;&#x5728;&#x7684;&#x4F9D;&#x8D56;&#x53EF;&#x53C2;&#x8003;<a href="https://github.com/chongqiangchen/slate-ng/blob/015c77ca710ff52dbabcb71374be87c2e394cc13/projects/slate-ng-view/src/components/element/token.ts#L4" target="_blank">token</a>&#xFF08;&#x6CE8;&#x610F;&#xFF1A;token&#x8FD8;&#x6CA1;&#x5408;&#x7406;&#x7684;&#x5212;&#x5206;&#xFF0C;&#x6240;&#x4EE5;&#x5E76;&#x975E;&#x5168;&#x90E8;&#x7684;token&#x5728;element&#x4E2D;&#x90FD;&#x53EF;&#x88AB;&#x83B7;&#x53D6;&#xFF0C;API&#x6587;&#x6863;&#x5C06;&#x4F1A;&#x7ED9;&#x51FA;&#x5177;&#x4F53;&#xFF0C;&#x5F85;&#x5B8C;&#x6210;&#xFF09;</li>
-<li><strong>&#x4EE3;&#x7801;&#x5757;4</strong>
+</code></pre>Here is the node information that we can obtain. First, each node element will have its own <code>key</code> as an identifier, which we obtain through <code>@Inject(KEY_TOKEN)</code>.
+It can be combined with <code>NsDepsService</code> to get all the dependencies required by the current component. For specific dependencies, please refer to<a href="https://github.com/chongqiangchen/slate-ng/blob/015c77ca710ff52dbabcb71374be87c2e394cc13/projects/slate-ng-view/src/components/element/token.ts#L4" target="_blank">token</a>&#xFF08;&#x6CE8;&#x610F;&#xFF1A;token&#x8FD8;&#x6CA1;&#x5408;&#x7406;&#x7684;&#x5212;&#x5206;&#xFF0C;&#x6240;&#x4EE5;&#x5E76;&#x975E;&#x5168;&#x90E8;&#x7684;token&#x5728;element&#x4E2D;&#x90FD;&#x53EF;&#x88AB;&#x83B7;&#x53D6;&#xFF0C;API&#x6587;&#x6863;&#x5C06;&#x4F1A;&#x7ED9;&#x51FA;&#x5177;&#x4F53;&#xFF0C;&#x5F85;&#x5B8C;&#x6210;&#xFF09;</li>
+<li><strong>Code Block 4</strong>
 <code>static type = &apos;code&apos;;</code>
-&#x6CE8;&#x610F;&#xFF01;&#x8FD9;&#x4E2A;&#x975E;&#x5E38;&#x91CD;&#x8981;&#xFF0C;&#x4E3B;&#x8981;&#x7528;&#x4E8E;&#x6807;&#x8BB0;&#x8BE5;Component&#x5C5E;&#x4E8E;&#x4EC0;&#x4E48;&#x8282;&#x70B9;&#x7C7B;&#x578B;&#x3002;
+<strong>Note!</strong> This is very important and is mainly used to mark which node type the Component belongs to.
 %/accordion%</li>
 </ul>
 </div></div></li>
-<li><p>&#x5BFC;&#x5165;&#x76F8;&#x5173;&#x7684;&#x4F9D;&#x8D56;&#x5230;Module&#x4E2D;</p>
+<li><p>Import related dependencies into Module</p>
 <pre><code>@NgModule({
    declarations: [
       AppComponent,
-      CodeComponent // &lt;-- &#x65B0;&#x589E;
+      CodeComponent // &lt;-- add
    ],
    imports: [
       BrowserModule,
       AppRoutingModule,
       SlateNgModule,
-      PortalModule // &lt;-- &#x65B0;&#x589E;
+      PortalModule // &lt;-- add
    ],
    bootstrap: [AppComponent]
 })
 export class AppModule {
 }
-</code></pre><p>&#x6CE8;&#x610F;&#xFF0C;&#x56E0;&#x4E3A;&#x6211;&#x4EEC;&#x4F1A;&#x4F7F;&#x7528;&#x5230;Angular CDK Portal,&#x5FC5;&#x987B;&#x6CE8;&#x5165;<code>PortalModule</code>&#xFF0C;&#x5176;&#x6B21;&#x7531;&#x4E8E;&#x4F1A;&#x4F7F;&#x7528;&#x5230;<ng-template>&#x6A21;&#x677F;&#x8BED;&#x6CD5;&#xFF0C;&#x6545;CodeComponent&#x4E5F;&#x9700;&#x8981;&#x5728;module&#x4E2D;&#x6CE8;&#x518C;</ng-template></p>
+</code></pre><p>Note that because we will use <code>Angular CDK Portal</code>, we must inject <code>PortalModule</code>, and secondly, because we will use <code>&lt;ng-template&gt;</code> template syntax, <code>CodeComponent</code> also needs to be registered in <code>module</code></p>
 </li>
-<li><p>&#x6700;&#x540E;&#x4E00;&#x6B65;&#xFF0C;&#x5728;<code>app.component.ts</code>&#x4E2D;&#x4F7F;&#x7528;<code>RegistryNsElement</code>&#x6CE8;&#x518C;&#x5230;slate-ng&#x4E2D;&#xFF0C;&#x5E76;&#x589E;&#x52A0;&#x89E6;&#x53D1;&#x6761;&#x4EF6;</p>
+<li><p>The last step is to use <code>RegistryNsElement</code> in <code>app.component.ts</code> to register to <code>slate-ng</code> and add trigger conditions</p>
 <pre><code> @Component({
    selector: &apos;app-root&apos;,
    templateUrl: &apos;./app.component.html&apos;,
@@ -480,18 +474,18 @@ export class AppModule {
    ];
 
    constructor(
-      private registryNsElement: RegistryNsElement &lt;-- &#x65B0;&#x589E;
+      private registryNsElement: RegistryNsElement &lt;-- add
    ) {
    }
 
    ngOnInit() {
-      this.registryNsElement.add([CodeComponent]); &lt;-- &#x65B0;&#x589E;
+      this.registryNsElement.add([CodeComponent]); &lt;-- add
    }
 
-   onKeyDown = (event: KeyboardEvent) =&gt; { &lt;-- &#x66F4;&#x65B0;
+   onKeyDown = (event: KeyboardEvent) =&gt; { &lt;-- update
       if (event.key === &apos;`&apos; &amp;&amp; event.ctrlKey) {
          event.preventDefault();
-         // &#x5426;&#x5219;&#xFF0C;&#x628A;&#x5F53;&#x524D;&#x9009;&#x62E9;&#x7684; blocks &#x7684;&#x7C7B;&#x578B;&#x8BBE;&#x4E3A; &quot;code&quot;&#x3002;
+         // Otherwise, set the type of the currently selected blocks to &quot;code&quot;
          Transforms.setNodes(
             this.editor,
             { type: &apos;code&apos; } as any,
@@ -502,7 +496,7 @@ export class AppModule {
  }
 </code></pre></li>
 </ol>
-<p>&#x597D;&#x4E86;&#xFF0C;&#x6211;&#x4EEC;&#x518D;&#x6B21;&#x6253;&#x5F00;&#x9875;&#x9762;&#xFF0C;&#x9009;&#x4E2D;&#x4E00;&#x90E8;&#x5206;&#x5185;&#x5BB9;&#xFF0C;&#x6309;&#x4E0B;Ctrl + `&#x5373;&#x53EF;&#x770B;&#x5230;&#x76F8;&#x5173;&#x7684;&#x6837;&#x5F0F;~</p>
+<p>Ok, let&apos;s open the page again, select part of the content, press Ctrl + ` to see the related styles~</p>
 <footer class="page-footer"><span class="copyright">Copyright all right reserved&#xFF0C;powered by Gitbook</span><span class="footer-modification">&#x8BE5;&#x6587;&#x4EF6;&#x4FEE;&#x8BA2;&#x65F6;&#x95F4;&#xFF1A;
 2021-06-20 11:00:36
 </span></footer>
@@ -532,12 +526,12 @@ export class AppModule {
 
             
                 
-                <a href="adding-event-handlers.html" class="navigation navigation-prev " aria-label="Previous page: 添加事件处理器">
+                <a href="adding-event-handlers.html" class="navigation navigation-prev " aria-label="Previous page: Adding Event Handlers">
                     <i class="fa fa-angle-left"></i>
                 </a>
                 
                 
-                <a href="applying-custom-formatting.html" class="navigation navigation-next " aria-label="Next page: 自定义样式">
+                <a href="applying-custom-formatting.html" class="navigation navigation-next " aria-label="Next page: Applying Custom Formatting">
                     <i class="fa fa-angle-right"></i>
                 </a>
                 
@@ -548,7 +542,7 @@ export class AppModule {
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"自定义节点","level":"1.2.3","depth":2,"next":{"title":"自定义样式","level":"1.2.4","depth":2,"path":"docs/walkthroughs/applying-custom-formatting.md","ref":"docs/walkthroughs/applying-custom-formatting.md","articles":[]},"previous":{"title":"添加事件处理器","level":"1.2.2","depth":2,"path":"docs/walkthroughs/adding-event-handlers.md","ref":"docs/walkthroughs/adding-event-handlers.md","articles":[]},"dir":"ltr"},"config":{"plugins":["emphasize","-highlight","tbfed-pagefooter","accordion"],"styles":{"website":"styles/website.css","ebook":"styles/ebook.css","pdf":"styles/pdf.css","mobi":"styles/mobi.css","epub":"styles/epub.css"},"pluginsConfig":{"tbfed-pagefooter":{"copyright":"Copyright","modify_label":"该文件修订时间：","modify_format":"YYYY-MM-DD HH:mm:ss"},"emphasize":{},"accordion":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"slate-ng document","language":"zh","gitbook":"*"},"file":{"path":"docs/walkthroughs/defining-custom-elements.md","mtime":"2021-06-20T11:00:36.734Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-06-20T11:01:04.480Z"},"basePath":"../..","book":{"language":"zh"}});
+            gitbook.page.hasChanged({"page":{"title":"Defining Custom Elements","level":"1.2.3","depth":2,"next":{"title":"Applying Custom Formatting","level":"1.2.4","depth":2,"path":"docs/walkthroughs/applying-custom-formatting.md","ref":"docs/walkthroughs/applying-custom-formatting.md","articles":[]},"previous":{"title":"Adding Event Handlers","level":"1.2.2","depth":2,"path":"docs/walkthroughs/adding-event-handlers.md","ref":"docs/walkthroughs/adding-event-handlers.md","articles":[]},"dir":"ltr"},"config":{"plugins":["emphasize","-highlight","tbfed-pagefooter","accordion"],"styles":{"website":"styles/website.css","ebook":"styles/ebook.css","pdf":"styles/pdf.css","mobi":"styles/mobi.css","epub":"styles/epub.css"},"pluginsConfig":{"tbfed-pagefooter":{"copyright":"Copyright","modify_label":"该文件修订时间：","modify_format":"YYYY-MM-DD HH:mm:ss"},"emphasize":{},"accordion":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"slate-ng document","language":"en","gitbook":"*"},"file":{"path":"docs/walkthroughs/defining-custom-elements.md","mtime":"2021-06-20T11:00:36.734Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-06-20T11:01:04.480Z"},"basePath":"../..","book":{"language":"en"}});
         });
     </script>
 </div>
