@@ -2,7 +2,7 @@
 
 1. 首先请先创建一个angular10+项目，然后安装相关依赖：
 ```zsh
-  npm install slate slate-ng
+  npm install slate slate-ng @angular/cdk
 ```
 2. 安装完后你可以安装下面的步骤进行导入
     
