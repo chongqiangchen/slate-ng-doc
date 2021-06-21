@@ -8,7 +8,8 @@
   * [自定义节点](docs/walkthroughs/defining-custom-elements.md)
   * [自定义样式](docs/walkthroughs/applying-custom-formatting.md)
   * [自定义Placeholder](docs/walkthroughs/defining-custom-placeholder.md)
-  * [绑定相关attr至指定元素](docs/walkthroughs/bind-attr.md)  
+  * [绑定相关attr至指定元素](docs/walkthroughs/bind-attr.md)
+  * [创建slate-ng插件](docs/walkthroughs/create-slate-ng-plugin.md)
 
 * API
   * [NsEditor](docs/api/ns-editor.md) 

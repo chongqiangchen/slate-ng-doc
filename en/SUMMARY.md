@@ -9,7 +9,8 @@
   * [Applying Custom Formatting](docs/walkthroughs/applying-custom-formatting.md)
   * [Defining Custom Placeholder](docs/walkthroughs/defining-custom-placeholder.md)
   * [Bind Attr](docs/walkthroughs/bind-attr.md)
-  
+  * [Create slate-ng Plugin](docs/walkthroughs/create-slate-ng-plugin.md)
+
 * API
   * [NsEditor](docs/api/ns-editor.md)
   * [BaseElement](docs/api/base-element.md)
