@@ -32,7 +32,7 @@
     },
     "theme-hqbook":{
       "favicon": "./favicon.ico",
-      "logo":"../../../logo.png",
+      "logo":"../../logo.png",
       "search-placeholder":"search",
       "copyButtons": true,
       "copyLines": true,
