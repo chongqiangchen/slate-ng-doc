@@ -73,6 +73,8 @@
     <link rel="shortcut icon" href="../../../gitbook/images/favicon.ico" type="image/x-icon">
 
     
+    <link rel="next" href="create-slate-ng-plugin.html" />
+    
     
     <link rel="prev" href="defining-custom-placeholder.html" />
     
@@ -223,6 +225,19 @@
             
                     
                     绑定相关attr至指定元素
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.7" data-path="create-slate-ng-plugin.html">
+            
+                <a href="create-slate-ng-plugin.html">
+            
+                    
+                    创建slate-ng插件
             
                 </a>
             
@@ -417,9 +432,28 @@
 <div id="book-search-results">
     <div class="search-noresults">
     
-          <section class="normal markdown-section"> <h1 id="&#x5F85;&#x5B8C;&#x5584;">&#x5F85;&#x5B8C;&#x5584;</h1>
+          <section class="normal markdown-section"> <h1 id="&#x7ED1;&#x5B9A;&#x76F8;&#x5173;attr&#x81F3;&#x6307;&#x5B9A;&#x5143;&#x7D20;">&#x7ED1;&#x5B9A;&#x76F8;&#x5173;attr&#x81F3;&#x6307;&#x5B9A;&#x5143;&#x7D20;</h1>
+<p>&#x524D;&#x9762;&#x5404;&#x4E2A;&#x81EA;&#x5B9A;&#x4E49;&#x7EC4;&#x4EF6;&#x7684;&#x521B;&#x5EFA;&#x4E8B;&#x5B9E;&#x4E0A;&#x90FD;&#x5728;<code>BaseElement</code>,<code>BasePlaceholder</code>,<code>BaseLeaf</code>&#x5E2E;&#x52A9;&#x4E0B;&#x5C06;&#x9700;&#x8981;&#x7684;<code>attr</code>&#x6807;&#x8BC6;&#x81EA;&#x52A8;&#x7ED1;&#x5B9A;&#x5230;&#x4E86;<code>host</code>&#x4E0A;&#xFF0C;
+&#x6545;&#x7528;&#x6237;&#x4E0D;&#x9700;&#x8981;&#x5904;&#x7406;&#xFF0C;&#x4F46;&#x662F;&#x5E76;&#x975E;&#x6240;&#x6709;&#x7684;&#x573A;&#x666F;&#x90FD;&#x9700;&#x8981;&#x7ED1;&#x5B9A;&#x5230;<code>host</code>&#x4E0A;&#xFF0C;&#x6240;&#x4EE5;&#x6211;&#x4EEC;&#x9700;&#x8981;&#x4F7F;&#x7528;&#x5230;<code>directive</code>: <code>element-attrs</code>, <code>leaf-attrs</code>, <code>placeholder-attrs</code>&#x7ED1;&#x5B9A;&#x5230;&#x6307;&#x5B9A;&#x7684;&#x4F4D;&#x7F6E;&#xFF0C;</p>
+<p>&#x63A5;&#x4E0B;&#x6765;&#x6211;&#x4EEC;&#x5C55;&#x793A;<code>element-attrs.directive</code>&#x7684;&#x4F7F;&#x7528;&#xFF1A;</p>
+<ol>
+<li><p>&#x5047;&#x5B9A;&#x6211;&#x4EEC;&#x9700;&#x8981;&#x4E00;&#x4E2A;Table&#x7EC4;&#x4EF6;&#xFF0C;&#x6211;&#x671F;&#x671B;&#x5C06;element attr&#x7ED1;&#x5B9A;&#x5728;tbody&#x4E0A;&#x800C;&#x4E0D;&#x662F;table/host&#x4E0A;&#xFF0C;&#x6545;&#x6211;&#x4EEC;&#x53EF;&#x4EE5;&#x8FD9;&#x6837;&#x505A;</p>
+<pre><code> // &#x5728;tbody&#x4E0A;&#x4F7F;&#x7528;nsElementAttrs
+ &lt;tbody nsElementAttrs&gt;
+   &lt;ng-container *ngFor=&quot;let portal of portals; trackBy: trackBy&quot;&gt;
+     &lt;ng-template [cdkPortalOutlet]=&quot;portal&quot;&gt;&lt;/ng-template&gt;
+   &lt;/ng-container&gt;
+ &lt;/tbody&gt;
+
+ // &#x8986;&#x5199;ngOnInit&#xFF0C;&#x8C03;&#x7528;init&#x65B9;&#x6CD5;&#x4F20;&#x5165;&#x53C2;&#x6570;useHostAttrs: false
+ ngOnInit() {
+   this.init({ useHostAttrs: false }); 
+ }
+</code></pre><p> &#x8FD9;&#x6837;&#x5373;&#x53EF;&#x505A;&#x5230;&#x5C06;element attrs&#x653E;&#x7F6E;&#x5230;&#x6307;&#x5B9A;&#x4F4D;&#x7F6E;</p>
+</li>
+</ol>
 <footer class="page-footer"><span class="copyright">Copyright all right reserved&#xFF0C;powered by Gitbook</span><span class="footer-modification">&#x8BE5;&#x6587;&#x4EF6;&#x4FEE;&#x8BA2;&#x65F6;&#x95F4;&#xFF1A;
-2021-06-21 01:15:28
+2021-06-21 13:39:47
 </span></footer> </section>
           
     </div>
@@ -446,17 +480,25 @@
      
     <a
       href="defining-custom-placeholder.html"
-      class="navigation navigation-prev navigation-unique"
+      class="navigation navigation-prev "
       aria-label="Previous page: 自定义Placeholder"
     >
       <i class="fa fa-angle-left"></i>
     </a>
-       
+     
+    <a
+      href="create-slate-ng-plugin.html"
+      class="navigation navigation-next "
+      aria-label="Next page: 创建slate-ng插件"
+    >
+      <i class="fa fa-angle-right"></i>
+    </a>
+      
   </div>
   <script>
     var gitbook = gitbook || [];
     gitbook.push(function() {
-        gitbook.page.hasChanged({"page":{"title":"绑定相关attr至指定元素","level":"1.2.6","depth":2,"next":{"title":"API","level":"1.3","depth":1,"ref":"","articles":[{"title":"NsEditor","level":"1.3.1","depth":2,"path":"docs/api/ns-editor.md","ref":"docs/api/ns-editor.md","articles":[]},{"title":"BaseElement","level":"1.3.2","depth":2,"path":"docs/api/base-element.md","ref":"docs/api/base-element.md","articles":[]},{"title":"BaseLeaf","level":"1.3.3","depth":2,"path":"docs/api/base-leaf.md","ref":"docs/api/base-leaf.md","articles":[]},{"title":"BasePlaceholder","level":"1.3.4","depth":2,"path":"docs/api/base-placholder.md","ref":"docs/api/base-placholder.md","articles":[]},{"title":"ElementAttrsDirective","level":"1.3.5","depth":2,"path":"docs/api/element-attrs-directive.md","ref":"docs/api/element-attrs-directive.md","articles":[]},{"title":"LeafAttrsDirective","level":"1.3.6","depth":2,"path":"docs/api/leaf-attrs-directive.md","ref":"docs/api/leaf-attrs-directive.md","articles":[]},{"title":"PlaceholderAttrsDirective","level":"1.3.7","depth":2,"path":"docs/api/placeholder-attrs-directive.md","ref":"docs/api/placeholder-attrs-directive.md","articles":[]}]},"previous":{"title":"自定义Placeholder","level":"1.2.5","depth":2,"path":"docs/walkthroughs/defining-custom-placeholder.md","ref":"docs/walkthroughs/defining-custom-placeholder.md","articles":[]},"dir":"ltr"},"config":{"plugins":["emphasize","-highlight","tbfed-pagefooter","accordion","theme-cqbook","pageview-count"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"tbfed-pagefooter":{"copyright":"Copyright","modify_label":"该文件修订时间：","modify_format":"YYYY-MM-DD HH:mm:ss"},"emphasize":{},"accordion":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"pageview-count":{},"theme-hqbook":{"favicon":"./favicon.ico","logo":"../../../logo.png","search-placeholder":"search","copyButtons":true,"copyLines":true,"dragSplitter":true,"hide-elements":[".summary .gitbook-link"]},"theme-cqbook":{"copyButtons":true,"copyLines":true,"dragSplitter":true,"favicon":"./favicon.ico","flexible-linkcard":{"hrefUrl":"../../demo/demo.html","imgClass":"","imgSrc":"../../images/home/logo.png","target":"_blank","title":"Converts blockquotes into beautiful linkcard, custom nice links"},"logo":"../../images/home/logo.png","search-placeholder":"输入关键字搜索"},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{"themeHqbook":{"nav":[{"url":"https://chongqiangchen.github.io/slate-ng","target":"_blank","name":"Examples"},{"url":"https://github.com/chongqiangchen/slate-ng","target":"_blank","name":"Github"}]}},"title":"Slate Ng Document","language":"zh","gitbook":"*"},"file":{"path":"docs/walkthroughs/bind-attr.md","mtime":"2021-06-21T01:15:28.974Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-06-21T01:16:03.653Z"},"basePath":"../..","book":{"language":"zh"}})
+        gitbook.page.hasChanged({"page":{"title":"绑定相关attr至指定元素","level":"1.2.6","depth":2,"next":{"title":"创建slate-ng插件","level":"1.2.7","depth":2,"path":"docs/walkthroughs/create-slate-ng-plugin.md","ref":"docs/walkthroughs/create-slate-ng-plugin.md","articles":[]},"previous":{"title":"自定义Placeholder","level":"1.2.5","depth":2,"path":"docs/walkthroughs/defining-custom-placeholder.md","ref":"docs/walkthroughs/defining-custom-placeholder.md","articles":[]},"dir":"ltr"},"config":{"plugins":["emphasize","-highlight","tbfed-pagefooter","accordion","theme-cqbook","pageview-count"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"tbfed-pagefooter":{"copyright":"Copyright","modify_label":"该文件修订时间：","modify_format":"YYYY-MM-DD HH:mm:ss"},"emphasize":{},"accordion":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"pageview-count":{},"theme-hqbook":{"favicon":"./favicon.ico","logo":"../../../logo.png","search-placeholder":"search","copyButtons":true,"copyLines":true,"dragSplitter":true,"hide-elements":[".summary .gitbook-link"]},"theme-cqbook":{"copyButtons":true,"copyLines":true,"dragSplitter":true,"favicon":"./favicon.ico","flexible-linkcard":{"hrefUrl":"../../demo/demo.html","imgClass":"","imgSrc":"../../images/home/logo.png","target":"_blank","title":"Converts blockquotes into beautiful linkcard, custom nice links"},"logo":"../../images/home/logo.png","search-placeholder":"输入关键字搜索"},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{"themeHqbook":{"nav":[{"url":"https://chongqiangchen.github.io/slate-ng","target":"_blank","name":"Examples"},{"url":"https://github.com/chongqiangchen/slate-ng","target":"_blank","name":"Github"}]}},"title":"Slate Ng Document","language":"zh","gitbook":"*"},"file":{"path":"docs/walkthroughs/bind-attr.md","mtime":"2021-06-21T13:39:47.529Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-06-21T13:40:19.021Z"},"basePath":"../..","book":{"language":"zh"}})
     });
   </script>
 </div>

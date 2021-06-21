@@ -4,7 +4,7 @@
     <head>
         <meta charset="UTF-8">
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-        <title>Defining Custom Elements · Slate Ng Document</title>
+        <title>Create slate-ng Plugin · Slate Ng Document</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
         <meta name="generator" content="GitBook 3.2.3">
@@ -73,10 +73,8 @@
     <link rel="shortcut icon" href="../../../gitbook/images/favicon.ico" type="image/x-icon">
 
     
-    <link rel="next" href="applying-custom-formatting.html" />
     
-    
-    <link rel="prev" href="adding-event-handlers.html" />
+    <link rel="prev" href="bind-attr.html" />
     
 
     </head>
@@ -180,7 +178,7 @@
             
         </li>
     
-        <li class="chapter active" data-level="1.2.3" data-path="defining-custom-elements.html">
+        <li class="chapter " data-level="1.2.3" data-path="defining-custom-elements.html">
             
                 <a href="defining-custom-elements.html">
             
@@ -232,7 +230,7 @@
             
         </li>
     
-        <li class="chapter " data-level="1.2.7" data-path="create-slate-ng-plugin.html">
+        <li class="chapter active" data-level="1.2.7" data-path="create-slate-ng-plugin.html">
             
                 <a href="create-slate-ng-plugin.html">
             
@@ -413,7 +411,7 @@
     <!-- Title -->
     <h1>
         <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href="../.." >Defining Custom Elements</a>
+        <a href="../.." >Create slate-ng Plugin</a>
     </h1>
 </div>
 
@@ -426,123 +424,162 @@
 <div id="book-search-results">
     <div class="search-noresults">
     
-          <section class="normal markdown-section"> <h1 id="defining-custom-elements">Defining Custom Elements</h1>
-<p>In the previous example, we all use the default built-in <code>block</code> node element, such as <code>paragraph</code> using <code>&lt;div&gt;</code>, in fact, we can define any type of custom <code>block</code> node,
-Such as block references, code blocks, list items, etc.</p>
-<p>Next we show how to customize code block nodes in <code>slate-ng</code>:</p>
+          <section class="normal markdown-section"> <h1 id="create-slate-ng-plugin">Create Slate Ng Plugin</h1>
+<p>In many cases, we will encounter a lot of node node elements that everyone needs. In fact, in slate-ng, we can extract this node component into a library for everyone to use.
+Next I will use <a href="https://www.npmjs.com/package/slate-ng-element-table" target="_blank">slate-ng-element-table</a> as a reference to teach you how to create a Slate Ng Plugin (in fact This is a tutorial to create a Library with Angular Cli):</p>
 <ol>
-<li><p>First Create Code Component</p>
-<pre><code> import {Component, ElementRef, Inject} from &apos;@angular/core&apos;;
- import {BaseElementComponent, Key, KEY_TOKEN, NsDepsService, NsEditorService} from &apos;slate-ng&apos;;
-
- @Component({
-     selector: &apos;pre[custom-code]&apos;,
-     template: `
-        &lt;code&gt;
-         &lt;ng-container *ngFor=&quot;let portal of portals; trackBy: trackBy&quot;&gt;
-             &lt;ng-template [cdkPortalOutlet]=&quot;portal&quot;&gt;&lt;/ng-template&gt;
-         &lt;/ng-container&gt;
-        &lt;/code&gt;
-     `
- })
- export class CodeComponent extends BaseElementComponent {
-     static type = &apos;code&apos;; // &#x6CE8;&#x610F;&#xFF0C;&#x8FD9;&#x975E;&#x5E38;&#x91CD;&#x8981;&#xFF0C;&#x5FC5;&#x987B;&#x5B58;&#x5728;&#xFF0C;&#x4E0D;&#x7136;&#x4F1A;&#x9020;&#x6210;&#x8FD9;&#x4E2A;Component&#x65E0;&#x6CD5;&#x88AB;&#x5E94;&#x7528;
-
-     constructor(
-         @Inject(KEY_TOKEN) readonly key: Key,
-         public deps: NsDepsService,
-         public editorService: NsEditorService,
-         public elementRef: ElementRef,
-     ) {
-         super(key, deps, editorService, elementRef);
-     }
- }
-</code></pre><div class="accordion accordionClose"><div class="accordionButton"><div class="accordionTitle"><strong>Analyze:</strong>&#xFF1A;Here is an explanation of the above code&#xFF1A;</div><div class="accordionSpinnerBox"><div class="accordionSpinner"></div></div></div><div class="accordionContent">
-<ul>
-<li><strong>Code Block 1</strong>&#xFF1A;<pre><code>   &lt;ng-container *ngFor=&quot;let portal of portals; trackBy: trackBy&quot;&gt;
-      &lt;ng-template [cdkPortalOutlet]=&quot;portal&quot;&gt;&lt;/ng-template&gt;
-   &lt;/ng-container&gt;
-</code></pre>   This is to render <code>childPortals</code>, that is, child elements. Of course, you can directly use the <code>ns-portal-child</code> component provided in <code>slate-ng</code> instead:<pre><code>   &lt;code&gt;
-     &lt;ns-portal-entry [portals]=&quot;portals&quot;&gt;&lt;/ns-portal-entry&gt;
-   &lt;/code&gt;
-</code></pre>However, the use of <code>ns-portal-entry</code> is not recommended. The main reason is that using this component to render sub-elements will add a layer of dom element wrapping inside.
-Although this does not affect the operation of the editor, it will deepen a layer of internal element nodes, so it is not recommended to use it in complex node components.</li>
-<li><strong>Code Block 2</strong>&#xFF1A;<pre><code>export class CodeComponent extends BaseElementComponent
-</code></pre>This inherits <code>BaseElementComponent</code>, which helps us to do a certain amount of <code>attr</code> increase and related content initialization, 
-such as the previous use of <code>portals</code>, this is also handled by <code>BaseElement</code> to export, and for this reason, we should also pay attention We need the corresponding dependencies of <code>super</code>, you can check xxx for details<a href="https://github.com/chongqiangchen/slate-ng/blob/015c77ca710ff52dbabcb71374be87c2e394cc13/projects/slate-ng-view/src/components/element/base-element.ts#L25" target="_blank">BaseElementComponent</a></li>
-<li><strong>Code Block 3</strong>:<pre><code>constructor(
-   @Inject(KEY_TOKEN) readonly key: Key,
-   public deps: NsDepsService,
-   public editorService: NsEditorService,
-   public elementRef: ElementRef,
-){//...}
-</code></pre>Here is the node information that we can obtain. First, each node element will have its own <code>key</code> as an identifier, which we obtain through <code>@Inject(KEY_TOKEN)</code>.
-It can be combined with <code>NsDepsService</code> to get all the dependencies required by the current component. For specific dependencies, please refer to<a href="https://github.com/chongqiangchen/slate-ng/blob/015c77ca710ff52dbabcb71374be87c2e394cc13/projects/slate-ng-view/src/components/element/token.ts#L4" target="_blank">token</a>&#xFF08;&#x6CE8;&#x610F;&#xFF1A;token&#x8FD8;&#x6CA1;&#x5408;&#x7406;&#x7684;&#x5212;&#x5206;&#xFF0C;&#x6240;&#x4EE5;&#x5E76;&#x975E;&#x5168;&#x90E8;&#x7684;token&#x5728;element&#x4E2D;&#x90FD;&#x53EF;&#x88AB;&#x83B7;&#x53D6;&#xFF0C;API&#x6587;&#x6863;&#x5C06;&#x4F1A;&#x7ED9;&#x51FA;&#x5177;&#x4F53;&#xFF0C;&#x5F85;&#x5B8C;&#x6210;&#xFF09;</li>
-<li><strong>Code Block 4</strong>
-<code>static type = &apos;code&apos;;</code>
-<strong>Note!</strong> This is very important and is mainly used to mark which node type the Component belongs to.
-%/accordion%</li>
-</ul>
-</div></div></li>
-<li><p>Import related dependencies into Module</p>
-<pre><code>@NgModule({
-   declarations: [
-      AppComponent,
-      CodeComponent // &lt;-- add
-   ],
-   imports: [
-      BrowserModule,
-      AppRoutingModule,
-      SlateNgModule,
-      PortalModule // &lt;-- add
-   ],
-   bootstrap: [AppComponent]
-})
-export class AppModule {
-}
-</code></pre><p>Note that because we will use <code>Angular CDK Portal</code>, we must inject <code>PortalModule</code>, and secondly, because we will use <code>&lt;ng-template&gt;</code> template syntax, <code>CodeComponent</code> also needs to be registered in <code>module</code></p>
+<li>First we need an Angular workspace, you can refer to <a href="https://angular.io/guide/creating-libraries" target="_blank">Angular</a><pre><code class="lang-shell"> ng new slate-ng-plugin-workspace --create-application=false
+ cd slate-ng-plugin-workspace
+ ng generate library slate-ng-element-table
+</code></pre>
 </li>
-<li><p>The last step is to use <code>RegistryNsElement</code> in <code>app.component.ts</code> to register to <code>slate-ng</code> and add trigger conditions</p>
-<pre><code> @Component({
-   selector: &apos;app-root&apos;,
-   templateUrl: &apos;./app.component.html&apos;,
-   styleUrls: [&apos;./app.component.less&apos;],
-   providers: [NsEditorService, NsDepsService, RegistryNsElement]
- })
- export class AppComponent implements OnInit {
-   title = &apos;angular-slate-demo&apos;;
-   editor = withHistory(withAngular(createEditor()));
-   value = [
-      {
-         type: &apos;paragraph&apos;,
-         children: [{text: &apos;&apos;}]
-      }
-   ];
-
-   constructor(
-      private registryNsElement: RegistryNsElement &lt;-- add
-   ) {
-   }
-
-   ngOnInit() {
-      this.registryNsElement.add([CodeComponent]); &lt;-- add
-   }
-
-   onKeyDown = (event: KeyboardEvent) =&gt; { &lt;-- update
-      if (event.key === &apos;`&apos; &amp;&amp; event.ctrlKey) {
-         event.preventDefault();
-         // Otherwise, set the type of the currently selected blocks to &quot;code&quot;
-         Transforms.setNodes(
-            this.editor,
-            { type: &apos;code&apos; } as any,
-            { match: n =&gt; Editor.isBlock(this.editor, n) }
-         );
-      }
-   }
- }
+<li>After creation, I will get the following directory structure:<pre><code>&#x251C;&#x2500;&#x2500; README.md
+&#x251C;&#x2500;&#x2500; angular.json
+&#x251C;&#x2500;&#x2500; node_modules
+&#x251C;&#x2500;&#x2500; package-lock.json
+&#x251C;&#x2500;&#x2500; package.json
+&#x251C;&#x2500;&#x2500; projects
+&#x2502;  &#x2514;&#x2500;&#x2500; slate-ng-element-table
+&#x2502;  &#x251C;&#x2500;&#x2500; README.md
+&#x2502;  &#x251C;&#x2500;&#x2500; karma.conf.js
+&#x2502;  &#x251C;&#x2500;&#x2500; ng-package.json
+&#x2502;  &#x251C;&#x2500;&#x2500; package.json
+&#x2502;  &#x251C;&#x2500;&#x2500; src
+&#x2502;  &#x2502;   &#x251C;&#x2500;&#x2500; lib
+&#x2502;  &#x2502;   &#x251C;&#x2500;&#x2500; public-api.ts
+&#x2502;  &#x2502;   &#x2514;&#x2500;&#x2500; test.ts
+&#x2502;  &#x251C;&#x2500;&#x2500; tsconfig.lib.json
+&#x2502;  &#x251C;&#x2500;&#x2500; tsconfig.lib.prod.json
+&#x2502;  &#x251C;&#x2500;&#x2500; tsconfig.spec.json
+&#x2502;  &#x2514;&#x2500;&#x2500; tslint.json
+&#x251C;&#x2500;&#x2500; tsconfig.json
+&#x2514;&#x2500;&#x2500; tslint.json
 </code></pre></li>
+<li>Change package.json dependencies and install:<pre><code class="lang-json">{
+&quot;name&quot;: &quot;&lt;u package name&gt;&quot;,
+&quot;version&quot;: &quot;0.0.1&quot;,
+&quot;peerDependencies&quot;: {
+ &quot;@angular/common&quot;: &quot;^10.2.4&quot;,
+ &quot;@angular/core&quot;: &quot;^10.2.4&quot;,
+ &quot;@angular/cdk&quot;: &quot;^10.2.4&quot;,
+ &quot;slate-ng&quot;: &quot;~0.0.2&quot;,
+ &quot;slate&quot;: &quot;&gt;=0.55.0&quot;
+},
+&quot;dependencies&quot;: {
+ &quot;tslib&quot;: &quot;^2.0.0&quot;
+},
+&quot;devDependencies&quot;: {
+   &quot;slate&quot;: &quot;^0.63.0&quot;,
+   &quot;@angular/cdk&quot;: &quot;^10.2.4&quot;,
+   &quot;slate-ng&quot;: &quot;~0.0.2&quot;
+}
+}
+</code></pre>
+</li>
+<li><p>Delete the <code>lib</code> folder, clean up the contents of <code>public-api.ts</code>, and add or update the following files:</p>
+<ul>
+<li><strong>index.ts</strong><pre><code>export * from &apos;./public-api&apos;;
+</code></pre></li>
+<li><p><a href="https://github.com/chongqiangchen/slate-ng/blob/master/projects/slate-ng-element-table/src/ns-element-table.module.ts" target="_blank"><strong>ns-element-table.module.ts</strong></a></p>
+</li>
+<li><p><a href="https://github.com/chongqiangchen/slate-ng/blob/3ed150c70214f51c17c569202e9a3dc350c817f5/projects/slate-ng-element-table/src/table.ts#L25" target="_blank"><strong>table.ts</strong></a></p>
+</li>
+<li><p><a href="https://github.com/chongqiangchen/slate-ng/blob/master/projects/slate-ng-element-table/src/table-row.ts" target="_blank"><strong>table-row.ts</strong></a></p>
+</li>
+<li><p><a href="https://github.com/chongqiangchen/slate-ng/blob/master/projects/slate-ng-element-table/src/table-cell.ts" target="_blank"><strong>table-cell.ts</strong></a></p>
+</li>
+<li><p><a href="https://github.com/chongqiangchen/slate-ng/blob/master/projects/slate-ng-element-table/src/with-table.ts" target="_blank"><strong>with-table.ts</strong></a></p>
+</li>
+<li><p><a href="https://github.com/chongqiangchen/slate-ng/blob/master/projects/slate-ng-element-table/src/table.css" target="_blank"><strong>table.css</strong></a></p>
+</li>
+<li><p><strong>public-api.ts</strong></p>
+<pre><code>// export some files
+export * from &apos;./ns-element-table.module&apos;;
+export * from &apos;./table&apos;;
+export * from &apos;./table-row&apos;;
+export * from &apos;./table-cell&apos;;
+export * from &apos;./with-table&apos;;
+</code></pre></li>
+</ul>
+</li>
+<li><p>Package and publish:</p>
+<pre><code>ng build --prod
+cd dist/slate-ng-element-table
+npm publish
+</code></pre></li>
+<li><p>There is already a plug-in before, so how to use it? Specific reference <a href="https://github.com/chongqiangchen/slate-ng/blob/master/projects/slate-ng-element-table/README.md" target="_blank">How to use</a></p>
+<p>We only need to import in the module <code>ns-element-table.module</code>&#xFF0C;Then use <code>withTables</code> wrap <code>editor</code>&#xFF0C;then registry&#xFF1A;<code>this.registryNsElement.add([SlateNgElementTableRow, SlateNgElementTableCell, SlateNgElementTable,]);</code>&#xFF0C;&#x521B;&#x5EFA;&#x5BF9;&#x5E94;&#x7684;value&#x503C;&#xFF1A;</p>
+<pre><code>{
+      type: &apos;table&apos;,
+      children: [
+        {
+          type: &apos;table-row&apos;,
+          children: [
+            {
+              type: &apos;table-cell&apos;,
+              children: [{text: &apos;&apos;}]
+            },
+            {
+              type: &apos;table-cell&apos;,
+              children: [{text: &apos;Human&apos;, bold: true}]
+            },
+            {
+              type: &apos;table-cell&apos;,
+              children: [{text: &apos;Dog&apos;, bold: true}]
+            },
+            {
+              type: &apos;table-cell&apos;,
+              children: [{text: &apos;Cat&apos;, bold: true}]
+            }
+          ]
+        },
+        {
+          type: &apos;table-row&apos;,
+          children: [
+            {
+              type: &apos;table-cell&apos;,
+              children: [{text: &apos;# of Feet&apos;, bold: true}]
+            },
+            {
+              type: &apos;table-cell&apos;,
+              children: [{text: &apos;2&apos;}]
+            },
+            {
+              type: &apos;table-cell&apos;,
+              children: [{text: &apos;4&apos;}]
+            },
+            {
+              type: &apos;table-cell&apos;,
+              children: [{text: &apos;4&apos;}]
+            }
+          ]
+        },
+        {
+          type: &apos;table-row&apos;,
+          children: [
+            {
+              type: &apos;table-cell&apos;,
+              children: [{text: &apos;# of Lives&apos;, bold: true}]
+            },
+            {
+              type: &apos;table-cell&apos;,
+              children: [{text: &apos;1&apos;}]
+            },
+            {
+              type: &apos;table-cell&apos;,
+              children: [{text: &apos;1&apos;}]
+            },
+            {
+              type: &apos;table-cell&apos;,
+              children: [{text: &apos;9&apos;}]
+            }
+          ]
+        }
+      ]
+  }
+</code></pre><p>Finally, you can see a table.</p>
+</li>
 </ol>
-<p>Ok, let&apos;s open the page again, select part of the content, press Ctrl + ` to see the related styles~</p>
 <footer class="page-footer"><span class="copyright">Copyright all right reserved&#xFF0C;powered by Gitbook</span><span class="footer-modification">&#x8BE5;&#x6587;&#x4EF6;&#x4FEE;&#x8BA2;&#x65F6;&#x95F4;&#xFF1A;
 2021-06-21 13:39:47
 </span></footer> </section>
@@ -570,26 +607,18 @@ export class AppModule {
 
      
     <a
-      href="adding-event-handlers.html"
-      class="navigation navigation-prev "
-      aria-label="Previous page: Adding Event Handlers"
+      href="bind-attr.html"
+      class="navigation navigation-prev navigation-unique"
+      aria-label="Previous page: Bind Attr"
     >
       <i class="fa fa-angle-left"></i>
     </a>
-     
-    <a
-      href="applying-custom-formatting.html"
-      class="navigation navigation-next "
-      aria-label="Next page: Applying Custom Formatting"
-    >
-      <i class="fa fa-angle-right"></i>
-    </a>
-      
+       
   </div>
   <script>
     var gitbook = gitbook || [];
     gitbook.push(function() {
-        gitbook.page.hasChanged({"page":{"title":"Defining Custom Elements","level":"1.2.3","depth":2,"next":{"title":"Applying Custom Formatting","level":"1.2.4","depth":2,"path":"docs/walkthroughs/applying-custom-formatting.md","ref":"docs/walkthroughs/applying-custom-formatting.md","articles":[]},"previous":{"title":"Adding Event Handlers","level":"1.2.2","depth":2,"path":"docs/walkthroughs/adding-event-handlers.md","ref":"docs/walkthroughs/adding-event-handlers.md","articles":[]},"dir":"ltr"},"config":{"plugins":["emphasize","-highlight","tbfed-pagefooter","accordion","theme-cqbook","pageview-count"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"tbfed-pagefooter":{"copyright":"Copyright","modify_label":"该文件修订时间：","modify_format":"YYYY-MM-DD HH:mm:ss"},"emphasize":{},"accordion":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"pageview-count":{},"theme-hqbook":{"favicon":"./favicon.ico","logo":"../../../logo.png","search-placeholder":"search","copyButtons":true,"copyLines":true,"dragSplitter":true,"hide-elements":[".summary .gitbook-link"]},"theme-cqbook":{"copyButtons":true,"copyLines":true,"dragSplitter":true,"favicon":"./favicon.ico","flexible-linkcard":{"hrefUrl":"../../demo/demo.html","imgClass":"","imgSrc":"../../images/home/logo.png","target":"_blank","title":"Converts blockquotes into beautiful linkcard, custom nice links"},"logo":"../../images/home/logo.png","search-placeholder":"输入关键字搜索"},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{"themeHqbook":{"nav":[{"url":"https://chongqiangchen.github.io/slate-ng","target":"_blank","name":"Examples"},{"url":"https://github.com/chongqiangchen/slate-ng","target":"_blank","name":"Github"}]}},"title":"Slate Ng Document","language":"en","gitbook":"*"},"file":{"path":"docs/walkthroughs/defining-custom-elements.md","mtime":"2021-06-21T13:39:47.529Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-06-21T13:40:19.021Z"},"basePath":"../..","book":{"language":"en"}})
+        gitbook.page.hasChanged({"page":{"title":"Create slate-ng Plugin","level":"1.2.7","depth":2,"next":{"title":"API","level":"1.3","depth":1,"ref":"","articles":[{"title":"NsEditor","level":"1.3.1","depth":2,"path":"docs/api/ns-editor.md","ref":"docs/api/ns-editor.md","articles":[]},{"title":"BaseElement","level":"1.3.2","depth":2,"path":"docs/api/base-element.md","ref":"docs/api/base-element.md","articles":[]},{"title":"BaseLeaf","level":"1.3.3","depth":2,"path":"docs/api/base-leaf.md","ref":"docs/api/base-leaf.md","articles":[]},{"title":"BasePlaceholder","level":"1.3.4","depth":2,"path":"docs/api/base-placholder.md","ref":"docs/api/base-placholder.md","articles":[]},{"title":"ElementAttrsDirective","level":"1.3.5","depth":2,"path":"docs/api/element-attrs-directive.md","ref":"docs/api/element-attrs-directive.md","articles":[]},{"title":"LeafAttrsDirective","level":"1.3.6","depth":2,"path":"docs/api/leaf-attrs-directive.md","ref":"docs/api/leaf-attrs-directive.md","articles":[]},{"title":"PlaceholderAttrsDirective","level":"1.3.7","depth":2,"path":"docs/api/placeholder-attrs-directive.md","ref":"docs/api/placeholder-attrs-directive.md","articles":[]}]},"previous":{"title":"Bind Attr","level":"1.2.6","depth":2,"path":"docs/walkthroughs/bind-attr.md","ref":"docs/walkthroughs/bind-attr.md","articles":[]},"dir":"ltr"},"config":{"plugins":["emphasize","-highlight","tbfed-pagefooter","accordion","theme-cqbook","pageview-count"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"tbfed-pagefooter":{"copyright":"Copyright","modify_label":"该文件修订时间：","modify_format":"YYYY-MM-DD HH:mm:ss"},"emphasize":{},"accordion":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"pageview-count":{},"theme-hqbook":{"favicon":"./favicon.ico","logo":"../../../logo.png","search-placeholder":"search","copyButtons":true,"copyLines":true,"dragSplitter":true,"hide-elements":[".summary .gitbook-link"]},"theme-cqbook":{"copyButtons":true,"copyLines":true,"dragSplitter":true,"favicon":"./favicon.ico","flexible-linkcard":{"hrefUrl":"../../demo/demo.html","imgClass":"","imgSrc":"../../images/home/logo.png","target":"_blank","title":"Converts blockquotes into beautiful linkcard, custom nice links"},"logo":"../../images/home/logo.png","search-placeholder":"输入关键字搜索"},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{"themeHqbook":{"nav":[{"url":"https://chongqiangchen.github.io/slate-ng","target":"_blank","name":"Examples"},{"url":"https://github.com/chongqiangchen/slate-ng","target":"_blank","name":"Github"}]}},"title":"Slate Ng Document","language":"en","gitbook":"*"},"file":{"path":"docs/walkthroughs/create-slate-ng-plugin.md","mtime":"2021-06-21T13:39:47.529Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-06-21T13:40:19.021Z"},"basePath":"../..","book":{"language":"en"}})
     });
   </script>
 </div>

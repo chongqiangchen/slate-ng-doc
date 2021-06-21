@@ -73,6 +73,8 @@
     <link rel="shortcut icon" href="../../../gitbook/images/favicon.ico" type="image/x-icon">
 
     
+    <link rel="next" href="create-slate-ng-plugin.html" />
+    
     
     <link rel="prev" href="defining-custom-placeholder.html" />
     
@@ -223,6 +225,19 @@
             
                     
                     Bind Attr
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.7" data-path="create-slate-ng-plugin.html">
+            
+                <a href="create-slate-ng-plugin.html">
+            
+                    
+                    Create slate-ng Plugin
             
                 </a>
             
@@ -411,9 +426,28 @@
 <div id="book-search-results">
     <div class="search-noresults">
     
-          <section class="normal markdown-section"> <h1 id="todo">todo</h1>
+          <section class="normal markdown-section"> <h1 id="bind-attr">Bind Attr</h1>
+<p>In fact, the creation of the various custom components in the front is in fact automatically bound to the <code>host</code> with the help of <code>BaseElement</code>, <code>BasePlaceholder</code>, and <code>BaseLeaf</code>.
+Therefore, users do not need to deal with it, but not all scenarios need to be bound to <code>host</code>, so we need to use <code>directive</code>: <code>element-attrs</code>, <code>leaf-attrs</code>, <code>placeholder-attrs</code> to bind to Designated location,</p>
+<p>Next we show the use of <code>element-attrs.directive</code>:</p>
+<ol>
+<li><p>Suppose we need a <code>Table</code> component, I expect to bind <code>element attr</code> to <code>tbody</code> instead of <code>table</code>/<code>host</code>, we can do this</p>
+<pre><code> // Use nsElementAttrs on tbody
+ &lt;tbody nsElementAttrs&gt;
+   &lt;ng-container *ngFor=&quot;let portal of portals; trackBy: trackBy&quot;&gt;
+     &lt;ng-template [cdkPortalOutlet]=&quot;portal&quot;&gt;&lt;/ng-template&gt;
+   &lt;/ng-container&gt;
+ &lt;/tbody&gt;
+
+ // Override `ngOnInit`, call the init method and pass in the parameter `useHostAttrs: false`
+ ngOnInit() {
+   this.init({ useHostAttrs: false }); 
+ }
+</code></pre><p>In this way, the element attrs can be placed in the specified position</p>
+</li>
+</ol>
 <footer class="page-footer"><span class="copyright">Copyright all right reserved&#xFF0C;powered by Gitbook</span><span class="footer-modification">&#x8BE5;&#x6587;&#x4EF6;&#x4FEE;&#x8BA2;&#x65F6;&#x95F4;&#xFF1A;
-2021-06-21 01:15:28
+2021-06-21 13:39:47
 </span></footer> </section>
           
     </div>
@@ -440,17 +474,25 @@
      
     <a
       href="defining-custom-placeholder.html"
-      class="navigation navigation-prev navigation-unique"
+      class="navigation navigation-prev "
       aria-label="Previous page: Defining Custom Placeholder"
     >
       <i class="fa fa-angle-left"></i>
     </a>
-       
+     
+    <a
+      href="create-slate-ng-plugin.html"
+      class="navigation navigation-next "
+      aria-label="Next page: Create slate-ng Plugin"
+    >
+      <i class="fa fa-angle-right"></i>
+    </a>
+      
   </div>
   <script>
     var gitbook = gitbook || [];
     gitbook.push(function() {
-        gitbook.page.hasChanged({"page":{"title":"Bind Attr","level":"1.2.6","depth":2,"next":{"title":"API","level":"1.3","depth":1,"ref":"","articles":[{"title":"NsEditor","level":"1.3.1","depth":2,"path":"docs/api/ns-editor.md","ref":"docs/api/ns-editor.md","articles":[]},{"title":"BaseElement","level":"1.3.2","depth":2,"path":"docs/api/base-element.md","ref":"docs/api/base-element.md","articles":[]},{"title":"BaseLeaf","level":"1.3.3","depth":2,"path":"docs/api/base-leaf.md","ref":"docs/api/base-leaf.md","articles":[]},{"title":"BasePlaceholder","level":"1.3.4","depth":2,"path":"docs/api/base-placholder.md","ref":"docs/api/base-placholder.md","articles":[]},{"title":"ElementAttrsDirective","level":"1.3.5","depth":2,"path":"docs/api/element-attrs-directive.md","ref":"docs/api/element-attrs-directive.md","articles":[]},{"title":"LeafAttrsDirective","level":"1.3.6","depth":2,"path":"docs/api/leaf-attrs-directive.md","ref":"docs/api/leaf-attrs-directive.md","articles":[]},{"title":"PlaceholderAttrsDirective","level":"1.3.7","depth":2,"path":"docs/api/placeholder-attrs-directive.md","ref":"docs/api/placeholder-attrs-directive.md","articles":[]}]},"previous":{"title":"Defining Custom Placeholder","level":"1.2.5","depth":2,"path":"docs/walkthroughs/defining-custom-placeholder.md","ref":"docs/walkthroughs/defining-custom-placeholder.md","articles":[]},"dir":"ltr"},"config":{"plugins":["emphasize","-highlight","tbfed-pagefooter","accordion","theme-cqbook","pageview-count"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"tbfed-pagefooter":{"copyright":"Copyright","modify_label":"该文件修订时间：","modify_format":"YYYY-MM-DD HH:mm:ss"},"emphasize":{},"accordion":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"pageview-count":{},"theme-hqbook":{"favicon":"./favicon.ico","logo":"../../../logo.png","search-placeholder":"search","copyButtons":true,"copyLines":true,"dragSplitter":true,"hide-elements":[".summary .gitbook-link"]},"theme-cqbook":{"copyButtons":true,"copyLines":true,"dragSplitter":true,"favicon":"./favicon.ico","flexible-linkcard":{"hrefUrl":"../../demo/demo.html","imgClass":"","imgSrc":"../../images/home/logo.png","target":"_blank","title":"Converts blockquotes into beautiful linkcard, custom nice links"},"logo":"../../images/home/logo.png","search-placeholder":"输入关键字搜索"},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{"themeHqbook":{"nav":[{"url":"https://chongqiangchen.github.io/slate-ng","target":"_blank","name":"Examples"},{"url":"https://github.com/chongqiangchen/slate-ng","target":"_blank","name":"Github"}]}},"title":"Slate Ng Document","language":"en","gitbook":"*"},"file":{"path":"docs/walkthroughs/bind-attr.md","mtime":"2021-06-21T01:15:28.970Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-06-21T01:16:03.653Z"},"basePath":"../..","book":{"language":"en"}})
+        gitbook.page.hasChanged({"page":{"title":"Bind Attr","level":"1.2.6","depth":2,"next":{"title":"Create slate-ng Plugin","level":"1.2.7","depth":2,"path":"docs/walkthroughs/create-slate-ng-plugin.md","ref":"docs/walkthroughs/create-slate-ng-plugin.md","articles":[]},"previous":{"title":"Defining Custom Placeholder","level":"1.2.5","depth":2,"path":"docs/walkthroughs/defining-custom-placeholder.md","ref":"docs/walkthroughs/defining-custom-placeholder.md","articles":[]},"dir":"ltr"},"config":{"plugins":["emphasize","-highlight","tbfed-pagefooter","accordion","theme-cqbook","pageview-count"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"tbfed-pagefooter":{"copyright":"Copyright","modify_label":"该文件修订时间：","modify_format":"YYYY-MM-DD HH:mm:ss"},"emphasize":{},"accordion":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"pageview-count":{},"theme-hqbook":{"favicon":"./favicon.ico","logo":"../../../logo.png","search-placeholder":"search","copyButtons":true,"copyLines":true,"dragSplitter":true,"hide-elements":[".summary .gitbook-link"]},"theme-cqbook":{"copyButtons":true,"copyLines":true,"dragSplitter":true,"favicon":"./favicon.ico","flexible-linkcard":{"hrefUrl":"../../demo/demo.html","imgClass":"","imgSrc":"../../images/home/logo.png","target":"_blank","title":"Converts blockquotes into beautiful linkcard, custom nice links"},"logo":"../../images/home/logo.png","search-placeholder":"输入关键字搜索"},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{"themeHqbook":{"nav":[{"url":"https://chongqiangchen.github.io/slate-ng","target":"_blank","name":"Examples"},{"url":"https://github.com/chongqiangchen/slate-ng","target":"_blank","name":"Github"}]}},"title":"Slate Ng Document","language":"en","gitbook":"*"},"file":{"path":"docs/walkthroughs/bind-attr.md","mtime":"2021-06-21T13:39:47.529Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-06-21T13:40:19.021Z"},"basePath":"../..","book":{"language":"en"}})
     });
   </script>
 </div>

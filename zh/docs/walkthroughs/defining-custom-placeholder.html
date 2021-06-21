@@ -232,6 +232,19 @@
             
         </li>
     
+        <li class="chapter " data-level="1.2.7" data-path="create-slate-ng-plugin.html">
+            
+                <a href="create-slate-ng-plugin.html">
+            
+                    
+                    创建slate-ng插件
+            
+                </a>
+            
+
+            
+        </li>
+    
 
             </ul>
             
@@ -419,9 +432,116 @@
 <div id="book-search-results">
     <div class="search-noresults">
     
-          <section class="normal markdown-section"> <h1 id="&#x5F85;&#x5B8C;&#x5584;">&#x5F85;&#x5B8C;&#x5584;</h1>
+          <section class="normal markdown-section"> <h1 id="&#x81EA;&#x5B9A;&#x4E49;placeholder">&#x81EA;&#x5B9A;&#x4E49;Placeholder</h1>
+<p>&#x5728;&#x524D;&#x9762;&#x7684;&#x4F8B;&#x5B50;&#x4E2D;&#xFF0C;&#x6211;&#x4EEC;&#x6F14;&#x793A;&#x4E86;&#x5982;&#x4F55;&#x81EA;&#x5B9A;&#x4E49;&#x8282;&#x70B9;&#xFF0C;&#x81EA;&#x5B9A;&#x4E49;&#x6837;&#x5F0F;&#xFF0C;&#x63A5;&#x4E0B;&#x6765;&#x5C06;&#x4F1A;&#x5E26;&#x5927;&#x5BB6;&#x81EA;&#x5B9A;&#x4E49;placeholder&#xFF1A;</p>
+<ol>
+<li><p>&#x9996;&#x5148;&#x521B;&#x5EFA;&#x81EA;&#x5B9A;&#x4E49;placeholder&#x7EC4;&#x4EF6;:</p>
+<pre><code> import { Component, Inject, Injector } from &apos;@angular/core&apos;;
+ import { BasePlaceholderComponent, PLACEHOLDER_CHILDREN_TOKEN } from &apos;slate-ng&apos;;
+
+ @Component(
+     {
+         selector: &apos;div[custom-placeholder]&apos;,
+         template: `
+             &lt;p style=&quot;margin: 0&quot;&gt;&lt;/p&gt;
+             &lt;pre&gt;Custom placeholder&lt;/pre&gt;
+         `
+     }
+ )
+ export class CustomPlaceholder extends BasePlaceholderComponent {
+     static type = &apos;placeholder&apos;; // &#x6CE8;&#x610F;&#x6B64;&#x7C7B;&#x578B;&#x5FC5;&#x987B;&#x4E3A;placeholder
+
+     constructor(
+         @Inject(PLACEHOLDER_CHILDREN_TOKEN) readonly children: any
+     ) {
+         super();
+     }
+ }
+</code></pre><p><strong>&#x6CE8;&#x610F;&#xFF1A;</strong> &#x6B64;&#x5904;children&#x5C31;&#x662F;&#x4E00;&#x4E2A;&#x5B57;&#x7B26;&#x4E32;&#xFF0C;&#x5E76;&#x975E;portal&#xFF0C;&#x6545;&#x53EF;&#x4EE5;&#x76F4;&#x63A5;&#x4F7F;&#x7528;&#x3002;</p>
+</li>
+<li>&#x5728;<code>app.component.ts</code>&#x4E2D;&#x4F7F;&#x7528;<code>RegistryNsElement</code>&#x6CE8;&#x518C;&#x5230;slate-ng&#x4E2D;&#xFF0C;&#x5E76;&#x589E;&#x52A0;&#x89E6;&#x53D1;&#x6761;&#x4EF6;<pre><code>// &#x5176;&#x4ED6;&#x4FDD;&#x6301;&#x4E0D;&#x53D8;&#xFF0C;&#x4EC5;&#x66F4;&#x65B0;registryNsElement
+this.registryNsElement.add([
+      CodeComponent,
+      LeafComponent,
+      CustomPlaceholder
+    ]);
+</code></pre></li>
+</ol>
+<h2 id="&#x5B8C;&#x6574;&#x4EE3;&#x7801;&#xFF1A;">&#x5B8C;&#x6574;&#x4EE3;&#x7801;&#xFF1A;</h2>
+<pre><code>// app.component.ts
+
+import {Component, OnInit} from &apos;@angular/core&apos;;
+import {NsDepsService, NsEditorService, RegistryNsElement, withAngular} from &apos;slate-ng&apos;;
+import {createEditor, Editor, Text, Transforms} from &apos;slate&apos;;
+import {withHistory} from &apos;slate-history&apos;;
+import {CodeComponent} from &apos;./code.component&apos;;
+import {LeafComponent} from &apos;./leaf.component&apos;;
+import {CustomPlaceholder} from &apos;./placeholder.component&apos;;
+
+@Component({
+  selector: &apos;app-root&apos;,
+  templateUrl: &apos;./app.component.html&apos;,
+  styleUrls: [&apos;./app.component.less&apos;],
+  providers: [NsEditorService, NsDepsService, RegistryNsElement]
+})
+export class AppComponent implements OnInit {
+  title = &apos;angular-slate-demo&apos;;
+  editor = withHistory(withAngular(createEditor()));
+  value = [
+    {
+      type: &apos;paragraph&apos;,
+      children: [{text: &apos;&apos;}]
+    }
+  ];
+
+  constructor(
+    private registryNsElement: RegistryNsElement
+  ) {
+  }
+
+  ngOnInit() {
+    this.registryNsElement.add([
+      CodeComponent,
+      LeafComponent,
+      CustomPlaceholder
+    ]);
+  }
+
+  onKeyDown = (event: KeyboardEvent) =&gt; {
+    const editor = this.editor;
+    if (!event.ctrlKey) {
+      return;
+    }
+
+    switch (event.key) {
+      case &apos;`&apos;: {
+        event.preventDefault();
+        const [match] = Editor.nodes(editor, {
+          match: (n: any) =&gt; n.type === &apos;code&apos;,
+        });
+        Transforms.setNodes(
+          editor,
+          {type: match ? null : &apos;code&apos;} as any,
+          {match: n =&gt; Editor.isBlock(editor, n)}
+        );
+        break;
+      }
+
+      case &apos;b&apos;: {
+        event.preventDefault();
+        Transforms.setNodes(
+          editor,
+          {bold: true} as any,
+          {match: n =&gt; Text.isText(n), split: true}
+        );
+        break;
+      }
+    }
+  };
+}
+</code></pre><p>&#x597D;&#x7684;&#xFF0C;&#x73B0;&#x5728;&#x4F60;&#x53EF;&#x4EE5;&#x770B;&#x5230;&#x53D8;&#x66F4;&#x540E;&#x7684;placeholder&#x4E86;&#x3002;</p>
 <footer class="page-footer"><span class="copyright">Copyright all right reserved&#xFF0C;powered by Gitbook</span><span class="footer-modification">&#x8BE5;&#x6587;&#x4EF6;&#x4FEE;&#x8BA2;&#x65F6;&#x95F4;&#xFF1A;
-2021-06-21 01:15:28
+2021-06-21 13:39:47
 </span></footer> </section>
           
     </div>
@@ -466,7 +586,7 @@
   <script>
     var gitbook = gitbook || [];
     gitbook.push(function() {
-        gitbook.page.hasChanged({"page":{"title":"自定义Placeholder","level":"1.2.5","depth":2,"next":{"title":"绑定相关attr至指定元素","level":"1.2.6","depth":2,"path":"docs/walkthroughs/bind-attr.md","ref":"docs/walkthroughs/bind-attr.md","articles":[]},"previous":{"title":"自定义样式","level":"1.2.4","depth":2,"path":"docs/walkthroughs/applying-custom-formatting.md","ref":"docs/walkthroughs/applying-custom-formatting.md","articles":[]},"dir":"ltr"},"config":{"plugins":["emphasize","-highlight","tbfed-pagefooter","accordion","theme-cqbook","pageview-count"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"tbfed-pagefooter":{"copyright":"Copyright","modify_label":"该文件修订时间：","modify_format":"YYYY-MM-DD HH:mm:ss"},"emphasize":{},"accordion":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"pageview-count":{},"theme-hqbook":{"favicon":"./favicon.ico","logo":"../../../logo.png","search-placeholder":"search","copyButtons":true,"copyLines":true,"dragSplitter":true,"hide-elements":[".summary .gitbook-link"]},"theme-cqbook":{"copyButtons":true,"copyLines":true,"dragSplitter":true,"favicon":"./favicon.ico","flexible-linkcard":{"hrefUrl":"../../demo/demo.html","imgClass":"","imgSrc":"../../images/home/logo.png","target":"_blank","title":"Converts blockquotes into beautiful linkcard, custom nice links"},"logo":"../../images/home/logo.png","search-placeholder":"输入关键字搜索"},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{"themeHqbook":{"nav":[{"url":"https://chongqiangchen.github.io/slate-ng","target":"_blank","name":"Examples"},{"url":"https://github.com/chongqiangchen/slate-ng","target":"_blank","name":"Github"}]}},"title":"Slate Ng Document","language":"zh","gitbook":"*"},"file":{"path":"docs/walkthroughs/defining-custom-placeholder.md","mtime":"2021-06-21T01:15:28.974Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-06-21T01:16:03.653Z"},"basePath":"../..","book":{"language":"zh"}})
+        gitbook.page.hasChanged({"page":{"title":"自定义Placeholder","level":"1.2.5","depth":2,"next":{"title":"绑定相关attr至指定元素","level":"1.2.6","depth":2,"path":"docs/walkthroughs/bind-attr.md","ref":"docs/walkthroughs/bind-attr.md","articles":[]},"previous":{"title":"自定义样式","level":"1.2.4","depth":2,"path":"docs/walkthroughs/applying-custom-formatting.md","ref":"docs/walkthroughs/applying-custom-formatting.md","articles":[]},"dir":"ltr"},"config":{"plugins":["emphasize","-highlight","tbfed-pagefooter","accordion","theme-cqbook","pageview-count"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"tbfed-pagefooter":{"copyright":"Copyright","modify_label":"该文件修订时间：","modify_format":"YYYY-MM-DD HH:mm:ss"},"emphasize":{},"accordion":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"pageview-count":{},"theme-hqbook":{"favicon":"./favicon.ico","logo":"../../../logo.png","search-placeholder":"search","copyButtons":true,"copyLines":true,"dragSplitter":true,"hide-elements":[".summary .gitbook-link"]},"theme-cqbook":{"copyButtons":true,"copyLines":true,"dragSplitter":true,"favicon":"./favicon.ico","flexible-linkcard":{"hrefUrl":"../../demo/demo.html","imgClass":"","imgSrc":"../../images/home/logo.png","target":"_blank","title":"Converts blockquotes into beautiful linkcard, custom nice links"},"logo":"../../images/home/logo.png","search-placeholder":"输入关键字搜索"},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{"themeHqbook":{"nav":[{"url":"https://chongqiangchen.github.io/slate-ng","target":"_blank","name":"Examples"},{"url":"https://github.com/chongqiangchen/slate-ng","target":"_blank","name":"Github"}]}},"title":"Slate Ng Document","language":"zh","gitbook":"*"},"file":{"path":"docs/walkthroughs/defining-custom-placeholder.md","mtime":"2021-06-21T13:39:47.529Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-06-21T13:40:19.021Z"},"basePath":"../..","book":{"language":"zh"}})
     });
   </script>
 </div>
