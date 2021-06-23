@@ -14,9 +14,9 @@
       </ng-container>
     </tbody>
     
-    // 覆写ngOnInit，调用init方法传入参数useHostAttrs: false
-    ngOnInit() {
-      this.init({ useHostAttrs: false }); 
+    // 覆写useHostAttrs方法
+    useHostAttrs() {
+       return false;
     }
     ```
     这样即可做到将element attrs放置到指定位置

@@ -14,9 +14,9 @@ Next we show the use of `element-attrs.directive`:
       </ng-container>
     </tbody>
     
-    // Override `ngOnInit`, call the init method and pass in the parameter `useHostAttrs: false`
-    ngOnInit() {
-      this.init({ useHostAttrs: false }); 
+    // Override `useHostAttrs` function
+    useHostAttrs() {
+       return false;
     }
     ```
    In this way, the element attrs can be placed in the specified position
